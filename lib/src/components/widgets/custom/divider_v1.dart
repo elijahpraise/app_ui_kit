@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// A customizable divider that supports horizontal and vertical
+/// orientations with rounded corners.
 class DividerV1 extends StatelessWidget {
   const DividerV1({
     super.key,
@@ -13,13 +15,21 @@ class DividerV1 extends StatelessWidget {
     this.borderRadius,
   });
 
+  /// Color of the divider line.
   final Color? color;
+  /// Thickness of the divider. Defaults to 1.
   final double? thickness;
+  /// Height (horizontal) or length (vertical) of the divider.
   final double? height;
+  /// Leading space before the divider.
   final double? indent;
+  /// Trailing space after the divider.
   final double? endIndent;
+  /// Whether to render a vertical divider instead of horizontal.
   final bool vertical;
+  /// Width of a vertical divider. Defaults to [thickness].
   final double? width;
+  /// Border radius for vertical divider rounded ends.
   final BorderRadius? borderRadius;
 
   @override

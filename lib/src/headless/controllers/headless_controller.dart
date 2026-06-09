@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 
 /// Base state holder for headless widget behavior.
 abstract class HeadlessController<T> extends ChangeNotifier {
+  /// Creates a controller with the given [initialValue].
   HeadlessController(T initialValue)
       : _initialValue = initialValue,
         _value = initialValue;
@@ -9,8 +10,10 @@ abstract class HeadlessController<T> extends ChangeNotifier {
   final T _initialValue;
   T _value;
 
+  /// The current value managed by this controller.
   T get value => _value;
 
+  /// Sets a new value and notifies listeners when the value changes.
   set value(T newValue) {
     if (_value == newValue) {
       return;

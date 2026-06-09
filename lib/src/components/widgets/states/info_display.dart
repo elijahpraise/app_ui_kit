@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+/// A centered information display with an icon, Lottie animation, title,
+/// and subtitle, commonly used for empty states or messages.
 class InfoDisplay extends StatelessWidget {
   const InfoDisplay({
     super.key,
@@ -19,18 +21,31 @@ class InfoDisplay extends StatelessWidget {
     this.padding,
   });
 
+  /// The primary text displayed below the icon.
   final String? title;
+  /// The secondary text displayed below the title.
   final String? subtitle;
+  /// Code point string for a MaterialIcon to display.
   final String? iconData;
+  /// A custom widget to use as the icon area.
   final Widget? icon;
+  /// Asset path to a Lottie animation to display.
   final String? lottie;
+  /// An alternative widget shown in place of the subtitle text.
   final Widget? subtitleAlt;
+  /// Size of the icon when using [iconData]. Defaults to 32.
   final double iconSize;
+  /// Width and height of the Lottie animation. Defaults to 280.
   final double lottieSize;
+  /// Color applied to the icon.
   final Color? iconColor;
+  /// Spacing between elements. Defaults to 16.
   final double? spacing;
+  /// Style override for the title text.
   final TextStyle? titleStyle;
+  /// Style override for the subtitle text.
   final TextStyle? subtitleStyle;
+  /// Padding around the entire content. Defaults to 24 on all sides.
   final EdgeInsetsGeometry? padding;
 
   @override

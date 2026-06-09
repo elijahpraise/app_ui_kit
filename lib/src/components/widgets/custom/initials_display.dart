@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// A circular or rounded avatar that displays initials derived from a
+/// name, with support for acronyms and animated transitions.
 class InitialsDisplay extends StatelessWidget {
   const InitialsDisplay({
     super.key,
@@ -13,13 +15,21 @@ class InitialsDisplay extends StatelessWidget {
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
+  /// The full name from which initials are extracted.
   final String name;
+  /// Width and height of the avatar. Defaults to 48.
   final double size;
+  /// Background color of the avatar circle.
   final Color? backgroundColor;
+  /// Style override for the initials text.
   final TextStyle? textStyle;
+  /// Border radius of the avatar. Defaults to half of [size] (circle).
   final double? radius;
+  /// Maximum number of initials to display. Defaults to 2.
   final int maxLetters;
+  /// Whether to take the first letter of every word as initials.
   final bool useAcronyms;
+  /// Duration of the animated container transition. Defaults to 200ms.
   final Duration animationDuration;
 
   String get _initials {

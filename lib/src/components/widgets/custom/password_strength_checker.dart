@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Represents the strength level of a password, from [weak] to [strong].
 enum PasswordStrength { weak, fair, good, strong }
 
 extension PasswordStrengthLabel on PasswordStrength {
@@ -31,6 +32,8 @@ extension PasswordStrengthLabel on PasswordStrength {
   }
 }
 
+/// A password strength indicator that evaluates a password against
+/// length, case, digit, and special character rules.
 class PasswordStrengthChecker extends StatelessWidget {
   const PasswordStrengthChecker({
     super.key,
@@ -40,9 +43,13 @@ class PasswordStrengthChecker extends StatelessWidget {
     this.radius,
   });
 
+  /// The password string to evaluate.
   final String password;
+  /// Whether to display the strength label below the bar. Defaults to true.
   final bool showLabel;
+  /// Thickness of the progress bar. Defaults to 4.
   final double height;
+  /// Border radius of the progress bar. Defaults to 2.
   final double? radius;
 
   PasswordStrength get _strength {

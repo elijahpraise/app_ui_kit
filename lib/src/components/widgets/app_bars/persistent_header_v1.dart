@@ -17,7 +17,11 @@ class PersistentHeaderV1 extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return child;
+    final progress = (shrinkOffset / (maxExtent - minExtent)).clamp(0.0, 1.0);
+    return Opacity(
+      opacity: 1.0 - progress,
+      child: child,
+    );
   }
 
   @override

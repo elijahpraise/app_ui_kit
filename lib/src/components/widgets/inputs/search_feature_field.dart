@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// A search input field styled for feature discovery with a search icon prefix.
 class SearchFeatureField extends StatelessWidget {
+  /// Creates a [SearchFeatureField].
   const SearchFeatureField({
     super.key,
     this.controller,
@@ -16,16 +18,27 @@ class SearchFeatureField extends StatelessWidget {
     this.hintStyle,
   });
 
+  /// The controller for the search text field.
   final TextEditingController? controller;
+  /// Called when the search text changes.
   final ValueChanged<String>? onChanged;
+  /// Called when the user submits the search query.
   final ValueChanged<String>? onSubmitted;
+  /// The focus node for keyboard focus management.
   final FocusNode? focusNode;
+  /// Placeholder text shown when the field is empty.
   final String? hintText;
+  /// Whether the field is interactive.
   final bool enabled;
+  /// Whether to focus the field on build.
   final bool autofocus;
+  /// The border radius of the input.
   final double? borderRadius;
+  /// The fill color of the input decoration.
   final Color? fillColor;
+  /// The style for the input text.
   final TextStyle? textStyle;
+  /// The style for the hint text.
   final TextStyle? hintStyle;
 
   @override

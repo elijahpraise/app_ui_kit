@@ -5,6 +5,8 @@ import 'color_tokens.dart';
 import 'radius_tokens.dart';
 import 'text_style_tokens.dart';
 
+/// Aggregates the resolved [ColorTokens], [TextStyleTokens], and
+/// [RadiusTokens] for the current [BuildContext]'s theme.
 class ThemeToken {
   const ThemeToken({
     required this.color,
@@ -12,10 +14,16 @@ class ThemeToken {
     required this.radius,
   });
 
+  /// The resolved color tokens for the current theme.
   final ColorTokens color;
+
+  /// The resolved text style tokens for the current theme.
   final TextStyleTokens textStyle;
+
+  /// The resolved radius tokens for the current theme.
   final RadiusTokens radius;
 
+  /// Resolves and returns a [ThemeToken] from the given [BuildContext].
   static ThemeToken of(BuildContext context) {
     final theme = Theme.of(context);
     final brightness = theme.brightness;
@@ -95,6 +103,10 @@ class ThemeToken {
   }
 }
 
+/// An extension on [BuildContext] to provide convenient access to the
+/// resolved [ThemeToken].
 extension ThemeTokenContext on BuildContext {
+  /// Short-hand getter for the current [ThemeToken] resolved from this
+  /// build context.
   ThemeToken get $token => ThemeToken.of(this);
 }

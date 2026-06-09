@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 
 import '../../foundation/platform.dart';
 
+/// A platform-aware scaffold that renders either a Material [Scaffold] or a
+/// [CupertinoPageScaffold] depending on the current platform.
 class BaseScaffold extends StatelessWidget {
   const BaseScaffold({
     super.key,
@@ -24,20 +26,50 @@ class BaseScaffold extends StatelessWidget {
     this.systemNavigationBarColor,
   });
 
+  /// An optional app bar to display at the top of the scaffold.
   final PreferredSizeWidget? appBar;
+
+  /// The primary content of the scaffold.
   final Widget? body;
+
+  /// An optional panel displayed from the leading edge of the scaffold.
   final Widget? drawer;
+
+  /// An optional panel displayed from the trailing edge of the scaffold.
   final Widget? endDrawer;
+
+  /// A navigation bar displayed at the bottom of the scaffold.
   final Widget? bottomNavigationBar;
+
+  /// A persistent bottom sheet anchored to the bottom of the scaffold.
   final Widget? bottomSheet;
+
+  /// A floating action button displayed above the body.
   final Widget? floatingActionButton;
+
+  /// The location of the [floatingActionButton] on the screen.
   final FloatingActionButtonLocation? floatingActionButtonLocation;
+
+  /// Whether the body extends into the bottom navigation bar area.
   final bool extendBody;
+
+  /// Whether the body extends behind the app bar.
   final bool extendBodyBehindAppBar;
+
+  /// A list of buttons displayed at the bottom of the scaffold, above the
+  /// bottom navigation bar.
   final List<Widget>? persistentFooterButtons;
+
+  /// The alignment of [persistentFooterButtons].
   final AlignmentDirectional? persistentFooterAlignment;
+
+  /// The background color of the scaffold.
   final Color? backgroundColor;
+
+  /// The brightness used for status bar icons and system UI overlays.
   final Brightness? brightness;
+
+  /// The color of the system navigation bar on Android.
   final Color? systemNavigationBarColor;
 
   @override

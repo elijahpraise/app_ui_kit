@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'validators.dart';
 
+/// A customizable text form field that wraps [TextFormField] with themed decoration and validation.
 class BaseTextField extends StatelessWidget {
+  /// Creates a [BaseTextField].
   const BaseTextField({
     super.key,
     this.controller,
@@ -58,56 +60,107 @@ class BaseTextField extends StatelessWidget {
     this.contextMenuBuilder,
   });
 
+  /// The controller for the text field.
   final TextEditingController? controller;
+  /// The focus node for keyboard focus management.
   final FocusNode? focusNode;
+  /// A callback that validates the current field value.
   final ValidatorCallback? validator;
+  /// Called when the text changes.
   final ValueChanged<String>? onChanged;
+  /// Called when the user submits the field value.
   final ValueChanged<String>? onFieldSubmitted;
+  /// Called to save the current field value.
   final FormFieldSetter<String>? onSaved;
+  /// Called when the text field is tapped.
   final GestureTapCallback? onTap;
+  /// The type of action button to show on the keyboard.
   final TextInputAction? textInputAction;
+  /// How to capitalize entered text.
   final TextCapitalization textCapitalization;
+  /// The type of keyboard to display.
   final TextInputType? keyboardType;
+  /// The keyboard appearance (light or dark).
   final Brightness? keyboardAppearance;
+  /// Whether to hide the text (e.g., for passwords).
   final bool obscureText;
+  /// The character used to obscure text.
   final String obscuringCharacter;
+  /// Whether to enable autocorrect.
   final bool autocorrect;
+  /// Whether to show text suggestions.
   final bool enableSuggestions;
+  /// Whether the field is interactive.
   final bool enabled;
+  /// Whether the field is read-only.
   final bool readOnly;
+  /// Whether to focus the field on build.
   final bool autofocus;
+  /// The maximum number of visible lines.
   final int? maxLines;
+  /// The minimum number of visible lines.
   final int? minLines;
+  /// The maximum number of characters allowed.
   final int? maxLength;
+  /// Placeholder text shown when the field is empty.
   final String? hintText;
+  /// The label text displayed above the field.
   final String? labelText;
+  /// Helper text displayed below the field.
   final String? helperText;
+  /// Error text displayed below the field.
   final String? errorText;
+  /// An icon to show before the input.
   final Widget? prefixIcon;
+  /// An icon to show after the input.
   final Widget? suffixIcon;
+  /// Text to show before the input.
   final String? prefixText;
+  /// Text to show after the input.
   final String? suffixText;
+  /// A widget to show before the input.
   final Widget? prefix;
+  /// A widget to show after the input.
   final Widget? suffix;
+  /// The fill color of the input decoration.
   final Color? fillColor;
+  /// The color of the enabled border.
   final Color? borderColor;
+  /// The color of the focused border.
   final Color? focusedBorderColor;
+  /// The color of the error border.
   final Color? errorBorderColor;
+  /// The style for the input text.
   final TextStyle? textStyle;
+  /// The style for the hint text.
   final TextStyle? hintStyle;
+  /// The style for the label text.
   final TextStyle? labelStyle;
+  /// The style for the error text.
   final TextStyle? errorStyle;
+  /// The padding inside the input decoration.
   final EdgeInsetsGeometry? contentPadding;
+  /// The border radius of the input.
   final double? borderRadius;
+  /// Whether the input has a filled background.
   final bool? filled;
+  /// The color of the cursor.
   final Color? cursorColor;
+  /// The width of the cursor in pixels.
   final double cursorWidth;
+  /// When to validate the field automatically.
   final AutovalidateMode? autovalidateMode;
+  /// The padding when scrolling the field into view.
   final EdgeInsets? scrollPadding;
+  /// How to align the input text.
   final TextAlign textAlign;
+  /// How to vertically align the input text.
   final TextAlignVertical? textAlignVertical;
+  /// Whether to show the cursor.
   final bool? showCursor;
+  /// The controller for undo/redo history.
   final UndoHistoryController? undoController;
+  /// A builder for the context menu.
   final EditableTextContextMenuBuilder? contextMenuBuilder;
 
   @override

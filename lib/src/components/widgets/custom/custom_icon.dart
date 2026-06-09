@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+/// Renders an SVG or raster image asset as an icon with optional color
+/// tinting and sizing.
 class CustomIcon extends StatelessWidget {
   const CustomIcon({
     super.key,
@@ -12,11 +14,18 @@ class CustomIcon extends StatelessWidget {
     this.isSvg,
   });
 
+  /// Asset path to the icon file (.svg or .png/.jpg).
   final String path;
+  /// Height of the icon. Defaults to 24.
   final double? height;
+  /// Width of the icon. Defaults to [height].
   final double? width;
+  /// Color tint applied to the icon.
   final Color? color;
+  /// How the image should fit within its bounds. Defaults to [BoxFit.contain].
   final BoxFit fit;
+  /// Whether the asset is an SVG. Auto-detected from the file extension
+  /// when null.
   final bool? isSvg;
 
   @override

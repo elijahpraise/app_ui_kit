@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'base_scaffold.dart';
 import 'loading_overlay_v1.dart';
 
+/// A convenience scaffold that wraps [BaseScaffold] with a [LoadingOverlayV1]
+/// to show a loading state over the body content.
 class ScaffoldV1 extends StatelessWidget {
   const ScaffoldV1({
     super.key,
@@ -25,22 +27,55 @@ class ScaffoldV1 extends StatelessWidget {
     this.indicator,
   });
 
+  /// An optional app bar to display at the top of the scaffold.
   final PreferredSizeWidget? appBar;
+
+  /// The primary content of the scaffold.
   final Widget? body;
+
+  /// An optional panel displayed from the leading edge of the scaffold.
   final Widget? drawer;
+
+  /// An optional panel displayed from the trailing edge of the scaffold.
   final Widget? endDrawer;
+
+  /// A navigation bar displayed at the bottom of the scaffold.
   final Widget? bottomNavigationBar;
+
+  /// A persistent bottom sheet anchored to the bottom of the scaffold.
   final Widget? bottomSheet;
+
+  /// A floating action button displayed above the body.
   final Widget? floatingActionButton;
+
+  /// The location of the [floatingActionButton] on the screen.
   final FloatingActionButtonLocation? floatingActionButtonLocation;
+
+  /// Whether the body extends into the bottom navigation bar area.
   final bool extendBody;
+
+  /// Whether the body extends behind the app bar.
   final bool extendBodyBehindAppBar;
+
+  /// A list of buttons displayed at the bottom of the scaffold.
   final List<Widget>? persistentFooterButtons;
+
+  /// The alignment of [persistentFooterButtons].
   final AlignmentDirectional? persistentFooterAlignment;
+
+  /// The background color of the scaffold.
   final Color? backgroundColor;
+
+  /// The brightness used for status bar icons and system UI overlays.
   final Brightness? brightness;
+
+  /// The color of the system navigation bar on Android.
   final Color? systemNavigationBarColor;
+
+  /// Whether the loading overlay is currently visible.
   final bool isLoading;
+
+  /// A custom loading indicator widget to display when [isLoading] is true.
   final Widget? indicator;
 
   @override

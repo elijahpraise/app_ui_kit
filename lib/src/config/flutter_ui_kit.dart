@@ -3,6 +3,7 @@ import 'flutter_ui_kit_theme_bundle.dart';
 
 /// Global initializer for configuring the UI kit in host applications.
 class FlutterUiKit {
+  /// Private constructor to prevent external instantiation.
   FlutterUiKit._();
 
   static FlutterUiKitConfig _config = const FlutterUiKitConfig();

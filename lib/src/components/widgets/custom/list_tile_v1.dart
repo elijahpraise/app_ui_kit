@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// A themed list tile with press animation, optional divider, and
+/// customizable styling for leading, title, subtitle, and trailing widgets.
 class ListTileV1 extends StatefulWidget {
   const ListTileV1({
     super.key,
@@ -23,23 +25,41 @@ class ListTileV1 extends StatefulWidget {
     this.animationDuration = const Duration(milliseconds: 150),
   });
 
+  /// The primary content of the list tile.
   final Widget title;
+  /// Additional content displayed below the title.
   final Widget? subtitle;
+  /// A widget displayed before the title.
   final Widget? leading;
+  /// A widget displayed after the title.
   final Widget? trailing;
+  /// Callback invoked when the tile is tapped.
   final VoidCallback? onTap;
+  /// Callback invoked when the tile is long-pressed.
   final VoidCallback? onLongPress;
+  /// Whether the tile is interactive. Defaults to true.
   final bool enabled;
+  /// Whether to use a dense layout with less vertical padding.
   final bool dense;
+  /// Whether the tile appears in a selected state.
   final bool selected;
+  /// Style override for the title text.
   final TextStyle? titleStyle;
+  /// Style override for the subtitle text.
   final TextStyle? subtitleStyle;
+  /// Size constraint for the leading widget.
   final double? leadingSize;
+  /// Padding around the tile content.
   final EdgeInsetsGeometry? contentPadding;
+  /// Background color of the tile.
   final Color? backgroundColor;
+  /// Border radius of the tile.
   final double? radius;
+  /// Border color of the tile.
   final Color? borderColor;
+  /// Whether to show a divider below the tile. Defaults to false.
   final bool divider;
+  /// Duration of press and layout animations. Defaults to 150ms.
   final Duration animationDuration;
 
   @override

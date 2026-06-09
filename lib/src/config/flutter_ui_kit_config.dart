@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'flutter_ui_kit_preset.dart';
 import 'flutter_ui_kit_theme_bundle.dart';
 
+/// Signature for building custom [ThemeData] from a [Brightness] and [FlutterUiKitConfig].
 typedef FlutterUiKitThemeBuilder = ThemeData Function(
   Brightness brightness,
   FlutterUiKitConfig config,
@@ -10,6 +11,7 @@ typedef FlutterUiKitThemeBuilder = ThemeData Function(
 
 /// Config contract supplied by host applications when initializing the package.
 class FlutterUiKitConfig {
+  /// Creates a [FlutterUiKitConfig] with default values and optional overrides.
   const FlutterUiKitConfig({
     this.fontFamily,
     this.preset = FlutterUiKitPreset.baseline,
@@ -73,6 +75,7 @@ class FlutterUiKitConfig {
     );
   }
 
+  /// Returns a copy of this config with the given fields replaced by new values.
   FlutterUiKitConfig copyWith({
     String? fontFamily,
     FlutterUiKitPreset? preset,
@@ -123,6 +126,28 @@ class FlutterUiKitConfig {
     switch (preset) {
       case FlutterUiKitPreset.baseline:
         return baseTheme;
+      case FlutterUiKitPreset.vercel:
+        return baseTheme.copyWith(
+          visualDensity: VisualDensity.compact,
+        );
+      case FlutterUiKitPreset.airbnb:
+        return baseTheme.copyWith(
+          visualDensity: VisualDensity.comfortable,
+          cardTheme: CardTheme(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+            ),
+          ),
+        );
+      case FlutterUiKitPreset.apple:
+        return baseTheme.copyWith(
+          visualDensity: VisualDensity.comfortable,
+          cardTheme: CardTheme(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        );
       case FlutterUiKitPreset.vibrant:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.comfortable,
@@ -180,15 +205,6 @@ class FlutterUiKitConfig {
               ? const Color(0xFFE6E6E6)
               : baseTheme.dividerColor,
         );
-      case FlutterUiKitPreset.airbnb:
-        return baseTheme.copyWith(
-          visualDensity: VisualDensity.comfortable,
-          cardTheme: CardTheme(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-            ),
-          ),
-        );
       case FlutterUiKitPreset.mongodb:
         return baseTheme.copyWith(
           scaffoldBackgroundColor: brightness == Brightness.dark
@@ -231,6 +247,14 @@ class FlutterUiKitConfig {
     switch (currentPreset) {
       case FlutterUiKitPreset.baseline:
         return const Color(0xFF4F46E5);
+      case FlutterUiKitPreset.vercel:
+        return brightness == Brightness.dark
+            ? const Color(0xFFFFFFFF)
+            : const Color(0xFF000000);
+      case FlutterUiKitPreset.airbnb:
+        return const Color(0xFFFF385C);
+      case FlutterUiKitPreset.apple:
+        return const Color(0xFF007AFF);
       case FlutterUiKitPreset.vibrant:
         return brightness == Brightness.dark
             ? const Color(0xFFE879F9)
@@ -249,8 +273,6 @@ class FlutterUiKitConfig {
         return const Color(0xFF5E6AD2);
       case FlutterUiKitPreset.notion:
         return const Color(0xFF0075DE);
-      case FlutterUiKitPreset.airbnb:
-        return const Color(0xFFFF385C);
       case FlutterUiKitPreset.mongodb:
         return const Color(0xFF00ED64);
       case FlutterUiKitPreset.raycast:

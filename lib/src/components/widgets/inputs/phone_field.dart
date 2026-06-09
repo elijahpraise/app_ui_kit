@@ -4,7 +4,9 @@ import 'package:intl_phone_field/phone_number.dart';
 
 import 'validators.dart';
 
+/// An international phone number input field with country code selection.
 class PhoneField extends StatelessWidget {
+  /// Creates a [PhoneField].
   const PhoneField({
     super.key,
     this.controller,
@@ -29,25 +31,45 @@ class PhoneField extends StatelessWidget {
     this.dropdownIcon,
   });
 
+  /// The controller for the phone text field.
   final TextEditingController? controller;
+  /// Called when the selected phone number changes.
   final ValueChanged<PhoneNumber>? onChanged;
+  /// A callback that validates the current field value.
   final ValidatorCallback? validator;
+  /// Whether the field is interactive.
   final bool enabled;
+  /// Placeholder text shown when the field is empty.
   final String? hintText;
+  /// The label text displayed above the field.
   final String? labelText;
+  /// The default country code (e.g., 'US').
   final String initialCountryCode;
+  /// The border radius of the input.
   final double? borderRadius;
+  /// The fill color of the input decoration.
   final Color? fillColor;
+  /// The color of the enabled border.
   final Color? borderColor;
+  /// The color of the focused border.
   final Color? focusedBorderColor;
+  /// The color of the error border.
   final Color? errorBorderColor;
+  /// The style for the input text.
   final TextStyle? textStyle;
+  /// The style for the hint text.
   final TextStyle? hintStyle;
+  /// The style for the label text.
   final TextStyle? labelStyle;
+  /// The style for the error text.
   final TextStyle? errorStyle;
+  /// The padding inside the input decoration.
   final EdgeInsetsGeometry? contentPadding;
+  /// When to validate the field automatically.
   final AutovalidateMode? autovalidateMode;
+  /// The style for the country code dropdown text.
   final TextStyle? dropdownTextStyle;
+  /// The icon for the country code dropdown.
   final Icon? dropdownIcon;
 
   @override

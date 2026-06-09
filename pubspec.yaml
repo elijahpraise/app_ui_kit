@@ -1,7 +1,7 @@
 name: flutter_ui_kit
 description: "A comprehensive Flutter UI kit with theming, components, and design presets."
 version: 0.0.1
-homepage:
+homepage: https://github.com/anomalyco/flutter_ui_kit
 
 environment:
   sdk: ^3.7.0
@@ -18,7 +18,6 @@ dependencies:
   flutter_styled_toast: ^2.2.1
   flutter_animated_dialog_updated: ^1.0.1
   intl_phone_field: ^3.2.0
-  loading_overlay: ^0.3.0
   intl: ^0.19.0
   lottie: ^3.1.3
 

@@ -16,6 +16,8 @@ import '../presets/starbucks_preset.dart';
 import '../presets/vercel_preset.dart';
 import '../presets/vibrant_preset.dart';
 
+/// Utility that builds a fully-themed [ThemeData] from a [DesignPreset] with
+/// configurable brightness, font family, and color scheme overrides.
 class AppTheme {
   AppTheme._();
 
@@ -39,6 +41,13 @@ class AppTheme {
     return GoogleFonts.getFont(fontFamily, textStyle: base);
   }
 
+  /// Builds a [ThemeData] from the given [preset], [brightness], and optional
+  /// [fontFamily] or [colorSchemeOverride].
+  ///
+  /// [preset] selects the design preset (e.g. default, vercel, apple).
+  /// [brightness] sets the theme to light or dark mode.
+  /// [fontFamily] overrides the default font family from the preset.
+  /// [colorSchemeOverride] replaces the computed [ColorScheme] entirely.
   static ThemeData build({
     required DesignPreset preset,
     Brightness brightness = Brightness.light,
@@ -552,6 +561,7 @@ class AppTheme {
     TextStyle _st(double size, FontWeight weight, {double? letterSpacing = 0}) {
       final base = TextStyle(fontSize: size, fontWeight: weight, letterSpacing: letterSpacing);
       if (fontFamily == null) return base;
+      if (!_canUseGoogleFonts) return base.copyWith(fontFamily: fontFamily);
       try {
         return GoogleFonts.getFont(fontFamily, textStyle: base);
       } catch (_) {

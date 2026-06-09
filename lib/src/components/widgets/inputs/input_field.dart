@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'base_text_field.dart';
 import 'validators.dart';
 
+/// A labeled form field that combines a label column with a [BaseTextField].
 class InputField extends StatelessWidget {
+  /// Creates an [InputField].
   const InputField({
     super.key,
     required this.label,
@@ -41,38 +43,71 @@ class InputField extends StatelessWidget {
     this.required = false,
   });
 
+  /// The label text displayed above the field.
   final String label;
+  /// The controller for the text field.
   final TextEditingController? controller;
+  /// The focus node for keyboard focus management.
   final FocusNode? focusNode;
+  /// A callback that validates the current field value.
   final ValidatorCallback? validator;
+  /// Called when the text changes.
   final ValueChanged<String>? onChanged;
+  /// Called when the user submits the field value.
   final ValueChanged<String>? onFieldSubmitted;
+  /// Whether to hide the text (e.g., for passwords).
   final bool obscureText;
+  /// The type of keyboard to display.
   final TextInputType? keyboardType;
+  /// The type of action button to show on the keyboard.
   final TextInputAction? textInputAction;
+  /// Whether the field is interactive.
   final bool enabled;
+  /// Whether the field is read-only.
   final bool readOnly;
+  /// The maximum number of visible lines.
   final int? maxLines;
+  /// Placeholder text shown when the field is empty.
   final String? hintText;
+  /// Helper text displayed below the field.
   final String? helperText;
+  /// Error text displayed below the field.
   final String? errorText;
+  /// An icon to show before the input.
   final Widget? prefixIcon;
+  /// An icon to show after the input.
   final Widget? suffixIcon;
+  /// A widget to show before the input.
   final Widget? prefix;
+  /// A widget to show after the input.
   final Widget? suffix;
+  /// The style for the label text.
   final TextStyle? labelStyle;
+  /// The style for the error text.
   final TextStyle? errorStyle;
+  /// The style for the input text.
   final TextStyle? textStyle;
+  /// The style for the hint text.
   final TextStyle? hintStyle;
+  /// The padding inside the input decoration.
   final EdgeInsetsGeometry? contentPadding;
+  /// The border radius of the input.
   final double? borderRadius;
+  /// The fill color of the input decoration.
   final Color? fillColor;
+  /// The color of the enabled border.
   final Color? borderColor;
+  /// The color of the focused border.
   final Color? focusedBorderColor;
+  /// The color of the error border.
   final Color? errorBorderColor;
+  /// When to validate the field automatically.
   final AutovalidateMode? autovalidateMode;
+  /// The vertical spacing between the label and the field.
   final double spacing;
+  /// Whether the column uses [MainAxisSize.min] instead of [MainAxisSize.max].
   final bool collapsed;
+  /// Whether to show an asterisk next to the label indicating a required field.
   final bool required;
 
   @override

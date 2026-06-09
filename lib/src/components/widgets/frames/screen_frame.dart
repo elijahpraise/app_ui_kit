@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+/// A scrollable screen frame that wraps a child with padding, supporting
+/// fixed-height and unbounded scroll modes.
 class ScreenFrame extends StatelessWidget {
-  const ScreenFrame({
+  ScreenFrame({
     super.key,
     required this.child,
     this.padding,
@@ -11,6 +13,8 @@ class ScreenFrame extends StatelessWidget {
     this.useSlivers = false,
   }) : _mode = ScreenFrameMode.unbounded;
 
+  /// Creates a fixed-height scrollable frame that constrains the child to
+  /// the available screen height.
   const ScreenFrame.fixed({
     super.key,
     required this.child,
@@ -20,6 +24,8 @@ class ScreenFrame extends StatelessWidget {
     this.useSlivers = false,
   }) : _mode = ScreenFrameMode.fixed;
 
+  /// Creates an unbounded scrollable frame that allows the child to take
+  /// its natural height.
   const ScreenFrame.unbounded({
     super.key,
     required this.child,
@@ -29,10 +35,15 @@ class ScreenFrame extends StatelessWidget {
     this.useSlivers = false,
   }) : _mode = ScreenFrameMode.unbounded;
 
+  /// The widget to display inside the scrollable frame.
   final Widget child;
+  /// Padding around the child. Defaults to horizontal 16.w and vertical 8.h.
   final EdgeInsetsGeometry? padding;
+  /// Optional scroll controller for the scroll view.
   final ScrollController? scrollController;
+  /// Axis along which the content scrolls. Defaults to [Axis.vertical].
   final Axis scrollDirection;
+  /// Whether to use slivers (CustomScrollView) in unbounded mode.
   final bool? useSlivers;
   final ScreenFrameMode _mode;
 
@@ -75,8 +86,12 @@ class ScreenFrame extends StatelessWidget {
   }
 }
 
+/// Determines whether [ScreenFrame] constrains its child to the available
+/// screen height ([fixed]) or allows unbounded scrolling ([unbounded]).
 enum ScreenFrameMode { fixed, unbounded }
 
+/// Extension on [BuildContext] that provides the available frame size
+/// accounting for system insets, app bar, and keyboard.
 extension ScreenFrameContext on BuildContext {
   Size frameSize() {
     final mediaQuery = MediaQuery.of(this);

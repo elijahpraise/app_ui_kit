@@ -4,44 +4,87 @@ import 'package:flutter/material.dart';
 import '../../foundation/platform.dart';
 import 'app_button_type.dart';
 
+/// A platform-adaptive filled button that renders either a Material
+/// [ElevatedButton] or a Cupertino [CupertinoButton] based on the current
+/// platform.
 class AppButton extends StatefulWidget {
+  /// Creates an [AppButton].
+  ///
+  /// The [text] parameter is required and displayed as the button label.
+  /// Use [loading] to show a spinner and [enabled] to control interactivity.
   const AppButton({
     super.key,
+    /// The label text displayed on the button.
     required this.text,
+    /// The visual style variant. Defaults to [AppButtonType.primary].
     this.type = AppButtonType.primary,
+    /// Called when the button is pressed.
     this.onTap,
+    /// The height of the button. If null, the button sizes to its content.
     this.height,
+    /// The width of the button. If null, the button sizes to its content.
     this.width,
+    /// Overrides the primary background color.
     this.primaryColor,
+    /// Overrides the secondary background color.
     this.secondaryColor,
+    /// Overrides the error background color.
     this.errorColor,
+    /// Overrides the text and icon foreground color.
     this.textColor,
+    /// The text style applied to the button label.
     this.textStyle,
+    /// The padding around the button content.
     this.padding,
+    /// The border radius of the button.
     this.radius,
+    /// Whether to show a loading spinner in place of the label. Defaults to false.
     this.loading = false,
+    /// Whether the button is interactive. Defaults to true.
     this.enabled = true,
+    /// An optional child widget that replaces the default text label.
     this.child,
+    /// The duration of the press-scale animation. Defaults to 150ms.
     this.animationDuration = const Duration(milliseconds: 150),
   });
 
+  /// Creates an [AppButton] with an icon and optional [spacing] and
+  /// [iconAlignment].
   factory AppButton.icon({
+    /// The label text displayed next to the icon.
     required String text,
+    /// The icon widget displayed alongside the text.
     required Widget icon,
+    /// The visual style variant. Defaults to [AppButtonType.primary].
     AppButtonType type = AppButtonType.primary,
+    /// Called when the button is pressed.
     VoidCallback? onTap,
+    /// The height of the button.
     double? height,
+    /// The width of the button.
     double? width,
+    /// Overrides the primary background color.
     Color? primaryColor,
+    /// Overrides the secondary background color.
     Color? secondaryColor,
+    /// Overrides the error background color.
     Color? errorColor,
+    /// Overrides the text and icon foreground color.
     Color? textColor,
+    /// The text style applied to the button label.
     TextStyle? textStyle,
+    /// The padding around the button content.
     EdgeInsetsGeometry? padding,
+    /// The border radius of the button.
     double? radius,
+    /// Whether to show a loading spinner. Defaults to false.
     bool loading = false,
+    /// Whether the button is interactive. Defaults to true.
     bool enabled = true,
+    /// The spacing between the icon and the text. Defaults to 8.
     double spacing = 8,
+    /// Whether the icon appears at the start or end of the label.
+    /// Defaults to [IconAlignment.start].
     IconAlignment iconAlignment = IconAlignment.start,
   }) {
     return AppButton(
@@ -68,21 +111,37 @@ class AppButton extends StatefulWidget {
     );
   }
 
+  /// The label text displayed on the button.
   final String text;
+  /// The visual style variant ([primary], [secondary], or [error]).
   final AppButtonType type;
+  /// Called when the button is pressed.
   final VoidCallback? onTap;
+  /// The height of the button.
   final double? height;
+  /// The width of the button.
   final double? width;
+  /// Overrides the primary background color.
   final Color? primaryColor;
+  /// Overrides the secondary background color.
   final Color? secondaryColor;
+  /// Overrides the error background color.
   final Color? errorColor;
+  /// Overrides the text and icon foreground color.
   final Color? textColor;
+  /// The text style applied to the button label.
   final TextStyle? textStyle;
+  /// The padding around the button content.
   final EdgeInsetsGeometry? padding;
+  /// The border radius of the button.
   final double? radius;
+  /// Whether to show a loading spinner in place of the label.
   final bool loading;
+  /// Whether the button is interactive.
   final bool enabled;
+  /// An optional child widget that replaces the default text label.
   final Widget? child;
+  /// The duration of the press-scale animation.
   final Duration animationDuration;
 
   @override

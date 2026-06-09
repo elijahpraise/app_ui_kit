@@ -118,6 +118,18 @@ void main() {
 
   test('getdesign presets resolve deterministic light and dark color schemes', () {
     const presetSeeds = <FlutterUiKitPreset, ({Color light, Color dark})>{
+      FlutterUiKitPreset.vercel: (
+        light: Color(0xFF000000),
+        dark: Color(0xFFFFFFFF),
+      ),
+      FlutterUiKitPreset.airbnb: (
+        light: Color(0xFFFF385C),
+        dark: Color(0xFFFF385C),
+      ),
+      FlutterUiKitPreset.apple: (
+        light: Color(0xFF007AFF),
+        dark: Color(0xFF007AFF),
+      ),
       FlutterUiKitPreset.spotify: (
         light: Color(0xFF1ED760),
         dark: Color(0xFF1ED760),
@@ -133,10 +145,6 @@ void main() {
       FlutterUiKitPreset.notion: (
         light: Color(0xFF0075DE),
         dark: Color(0xFF0075DE),
-      ),
-      FlutterUiKitPreset.airbnb: (
-        light: Color(0xFFFF385C),
-        dark: Color(0xFFFF385C),
       ),
       FlutterUiKitPreset.mongodb: (
         light: Color(0xFF00ED64),

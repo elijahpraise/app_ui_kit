@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// A bottom sheet content widget for selecting from a list of items.
 class BottomSheetSelectContent<T> extends StatelessWidget {
+  /// Creates a [BottomSheetSelectContent].
   const BottomSheetSelectContent({
     super.key,
     required this.items,
@@ -10,10 +12,15 @@ class BottomSheetSelectContent<T> extends StatelessWidget {
     this.emptyText = 'No results found',
   });
 
+  /// The list of selectable items.
   final List<SelectItem<T>> items;
+  /// Called when an item is selected.
   final ValueChanged<SelectItem<T>> onSelected;
+  /// The optional title displayed at the top of the sheet.
   final String? title;
+  /// The hint text for the search field.
   final String searchHint;
+  /// The text shown when no search results match.
   final String emptyText;
 
   @override
@@ -56,7 +63,9 @@ class BottomSheetSelectContent<T> extends StatelessWidget {
   }
 }
 
+/// A generic data model for items displayed in a selection list.
 class SelectItem<T> {
+  /// Creates a [SelectItem].
   const SelectItem({
     required this.label,
     this.value,
@@ -65,9 +74,14 @@ class SelectItem<T> {
     this.trailing,
   });
 
+  /// The display label for the item.
   final String label;
+  /// The optional value associated with this item.
   final T? value;
+  /// An optional subtitle displayed below the label.
   final String? subtitle;
+  /// An optional leading widget.
   final Widget? leading;
+  /// An optional trailing widget.
   final Widget? trailing;
 }

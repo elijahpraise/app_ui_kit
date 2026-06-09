@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// A styled container frame for list items with configurable padding,
+/// margin, background, border, elevation, and animated transitions.
 class ListFrame extends StatelessWidget {
   const ListFrame({
     super.key,
@@ -13,13 +15,21 @@ class ListFrame extends StatelessWidget {
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
+  /// The widget to display inside the frame.
   final Widget child;
+  /// Inner padding around [child]. Defaults to 16 on all sides.
   final EdgeInsetsGeometry? padding;
+  /// Outer margin around the frame.
   final EdgeInsetsGeometry? margin;
+  /// Background color of the frame.
   final Color? backgroundColor;
+  /// Border radius of the frame. Defaults to 12.
   final double? radius;
+  /// Border color of the frame.
   final Color? borderColor;
+  /// Elevation for the drop shadow. No shadow when null or zero.
   final double? elevation;
+  /// Duration of the animated container transition. Defaults to 200ms.
   final Duration animationDuration;
 
   @override

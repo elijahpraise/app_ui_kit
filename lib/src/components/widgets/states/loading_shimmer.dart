@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// A shimmer placeholder that animates a sweeping gradient across its
+/// surface to indicate loading content.
 class LoadingShimmer extends StatefulWidget {
   const LoadingShimmer({
     super.key,
@@ -11,11 +13,17 @@ class LoadingShimmer extends StatefulWidget {
     this.child,
   });
 
+  /// Width of the shimmer placeholder.
   final double? width;
+  /// Height of the shimmer placeholder. Defaults to 20.
   final double? height;
+  /// Border radius for rectangular shimmer shapes.
   final double? radius;
+  /// Shape of the shimmer. Defaults to [BoxShape.rectangle].
   final BoxShape shape;
+  /// Base color of the shimmer gradient.
   final Color? color;
+  /// An optional child to render instead of the default shimmer container.
   final Widget? child;
 
   @override

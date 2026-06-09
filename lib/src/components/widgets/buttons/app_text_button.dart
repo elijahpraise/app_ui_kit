@@ -4,38 +4,73 @@ import 'package:flutter/material.dart';
 import '../../foundation/platform.dart';
 import 'app_button_type.dart';
 
+/// A platform-adaptive text-only button that renders either a Material
+/// [TextButton] or a Cupertino [CupertinoButton] with transparent background
+/// based on the current platform.
 class AppTextButton extends StatefulWidget {
+  /// Creates an [AppTextButton].
+  ///
+  /// The [text] parameter is required. Use [loading] to show a spinner
+  /// and [enabled] to control interactivity.
   const AppTextButton({
     super.key,
+    /// The label text displayed on the button.
     required this.text,
+    /// The visual style variant. Defaults to [AppButtonType.primary].
     this.type = AppButtonType.primary,
+    /// Called when the button is pressed.
     this.onTap,
+    /// The height of the button.
     this.height,
+    /// The width of the button.
     this.width,
+    /// Overrides the primary foreground color.
     this.primaryColor,
+    /// Overrides the secondary foreground color.
     this.secondaryColor,
+    /// Overrides the error foreground color.
     this.errorColor,
+    /// Overrides the text foreground color.
     this.textColor,
+    /// The text style applied to the button label.
     this.textStyle,
+    /// The padding around the button content.
     this.padding,
+    /// Whether to show a loading spinner. Defaults to false.
     this.loading = false,
+    /// Whether the button is interactive. Defaults to true.
     this.enabled = true,
+    /// The duration of the press-scale animation. Defaults to 150ms.
     this.animationDuration = const Duration(milliseconds: 150),
   });
 
+  /// The label text displayed on the button.
   final String text;
+  /// The visual style variant.
   final AppButtonType type;
+  /// Called when the button is pressed.
   final VoidCallback? onTap;
+  /// The height of the button.
   final double? height;
+  /// The width of the button.
   final double? width;
+  /// Overrides the primary foreground color.
   final Color? primaryColor;
+  /// Overrides the secondary foreground color.
   final Color? secondaryColor;
+  /// Overrides the error foreground color.
   final Color? errorColor;
+  /// Overrides the text foreground color.
   final Color? textColor;
+  /// The text style applied to the button label.
   final TextStyle? textStyle;
+  /// The padding around the button content.
   final EdgeInsetsGeometry? padding;
+  /// Whether to show a loading spinner in place of the label.
   final bool loading;
+  /// Whether the button is interactive.
   final bool enabled;
+  /// The duration of the press-scale animation.
   final Duration animationDuration;
 
   @override

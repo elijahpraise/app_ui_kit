@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../foundation/platform.dart';
 
+/// A platform-aware dialog with primary and secondary action buttons.
 class ActionDialog extends StatelessWidget {
+  /// Creates an [ActionDialog].
   const ActionDialog({
     super.key,
     this.title,
@@ -20,17 +22,29 @@ class ActionDialog extends StatelessWidget {
     this.padding,
   });
 
+  /// The title text of the dialog.
   final String? title;
+  /// The subtitle text of the dialog.
   final String? subtitle;
+  /// An optional custom widget used instead of [title].
   final Widget? titleAlt;
+  /// An optional custom widget used instead of [subtitle].
   final Widget? subtitleAlt;
+  /// The label for the primary action button.
   final String primaryText;
+  /// The label for the secondary action button.
   final String secondaryText;
+  /// Called when the primary action is tapped.
   final VoidCallback? onPrimary;
+  /// Called when the secondary action is tapped.
   final VoidCallback? onSecondary;
+  /// The color of the primary action button text.
   final Color? primaryColor;
+  /// The color of the secondary action button text.
   final Color? secondaryColor;
+  /// The border radius of the dialog (Material only).
   final double? borderRadius;
+  /// The padding around the dialog content.
   final EdgeInsetsGeometry? padding;
 
   @override

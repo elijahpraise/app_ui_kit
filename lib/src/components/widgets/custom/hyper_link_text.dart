@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// A tappable text widget styled as a hyperlink with an optional
+/// underline decoration.
 class HyperLinkText extends StatelessWidget {
   const HyperLinkText({
     super.key,
@@ -10,10 +12,15 @@ class HyperLinkText extends StatelessWidget {
     this.underline = true,
   });
 
+  /// The text content to display as a hyperlink.
   final String text;
+  /// Callback invoked when the text is tapped.
   final VoidCallback onTap;
+  /// Style override for the hyperlink text.
   final TextStyle? style;
+  /// Color of the hyperlink text. Defaults to the primary color.
   final Color? color;
+  /// Whether to show an underline. Defaults to true.
   final bool underline;
 
   @override

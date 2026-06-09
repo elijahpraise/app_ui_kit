@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// A small circular dot indicator that animates between active and
+/// inactive states with color changes.
 class Dot extends StatelessWidget {
   const Dot({
     super.key,
@@ -9,9 +11,13 @@ class Dot extends StatelessWidget {
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
+  /// Diameter of the dot. Defaults to 8.
   final double size;
+  /// Color when [active] is true. Defaults to the primary color.
   final Color? color;
+  /// Whether the dot is in the active (filled) state.
   final bool active;
+  /// Duration of the animated transition. Defaults to 200ms.
   final Duration animationDuration;
 
   @override

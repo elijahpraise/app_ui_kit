@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Defines the visual style variants for toast notifications.
 enum ToastType { info, error, success }
 
 extension ToastTypeColor on ToastType {
@@ -28,9 +29,10 @@ extension ToastTypeColor on ToastType {
   }
 }
 
+/// A lightweight toast notification widget with type-based styling.
 class ToastV1 extends StatelessWidget {
+  /// Creates a [ToastV1].
   const ToastV1({
-    super.key,
     required this.message,
     this.type = ToastType.info,
     this.onClose,
@@ -38,10 +40,15 @@ class ToastV1 extends StatelessWidget {
     this.duration,
   });
 
+  /// The message text displayed in the toast.
   final String message;
+  /// The visual style variant of the toast.
   final ToastType type;
+  /// Called when the close button is tapped. If null, the close button is hidden.
   final VoidCallback? onClose;
+  /// An optional title displayed above the message.
   final String? title;
+  /// The duration the toast should remain visible (for external use).
   final Duration? duration;
 
   @override

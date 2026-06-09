@@ -12,6 +12,7 @@ typedef HeadlessWidgetBuilder<T> = Widget Function(
 
 /// Listens to a [HeadlessController] and rebuilds when value changes.
 class HeadlessBuilder<T> extends StatelessWidget {
+  /// Creates a builder that listens to [controller] and delegates rendering to [builder].
   const HeadlessBuilder({
     super.key,
     required this.controller,
@@ -19,8 +20,11 @@ class HeadlessBuilder<T> extends StatelessWidget {
     this.child,
   });
 
+  /// The controller whose state changes drive UI rebuilds.
   final HeadlessController<T> controller;
+  /// Builds a widget tree from the current controller value.
   final HeadlessWidgetBuilder<T> builder;
+  /// An optional child forwarded to [builder] for optimization.
   final Widget? child;
 
   @override

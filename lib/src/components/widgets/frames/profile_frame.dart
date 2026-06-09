@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// A circular or rounded frame for displaying profile images or placeholder
+/// widgets, with support for network images and animated transitions.
 class ProfileFrame extends StatelessWidget {
   const ProfileFrame({
     super.key,
@@ -14,14 +16,23 @@ class ProfileFrame extends StatelessWidget {
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
+  /// Fallback widget shown when [imageUrl] is null or fails to load.
   final Widget? child;
+  /// URL of the network image to display.
   final String? imageUrl;
+  /// How the image should be inscribed into the frame. Defaults to [BoxFit.cover].
   final BoxFit? fit;
+  /// Width and height of the frame. Defaults to 48.
   final double? size;
+  /// Border radius of the frame. Defaults to half of [size] (circle).
   final double? radius;
+  /// Background color shown when no image or child is provided.
   final Color? backgroundColor;
+  /// Border color around the frame.
   final Color? borderColor;
+  /// Width of the border. Defaults to 1.
   final double? borderWidth;
+  /// Duration of the animated container transition. Defaults to 200ms.
   final Duration animationDuration;
 
   @override

@@ -4,42 +4,81 @@ import 'package:flutter/material.dart';
 import '../../foundation/platform.dart';
 import 'app_button_type.dart';
 
+/// A platform-adaptive outlined button that renders either a Material
+/// [OutlinedButton] or a Cupertino-style outlined button based on the current
+/// platform.
 class AppOutlineButton extends StatefulWidget {
+  /// Creates an [AppOutlineButton].
+  ///
+  /// The [text] parameter is required. Use [loading] to show a spinner
+  /// and [borderWidth] to control the stroke thickness.
   const AppOutlineButton({
     super.key,
+    /// The label text displayed on the button.
     required this.text,
+    /// The visual style variant. Defaults to [AppButtonType.primary].
     this.type = AppButtonType.primary,
+    /// Called when the button is pressed.
     this.onTap,
+    /// The height of the button.
     this.height,
+    /// The width of the button.
     this.width,
+    /// Overrides the primary border/foreground color.
     this.primaryColor,
+    /// Overrides the secondary border/foreground color.
     this.secondaryColor,
+    /// Overrides the error border/foreground color.
     this.errorColor,
+    /// Overrides the text foreground color.
     this.textColor,
+    /// The text style applied to the button label.
     this.textStyle,
+    /// The padding around the button content.
     this.padding,
+    /// The border radius of the button.
     this.radius,
+    /// The width of the border stroke. Defaults to 1.
     this.borderWidth = 1,
+    /// Whether to show a loading spinner. Defaults to false.
     this.loading = false,
+    /// Whether the button is interactive. Defaults to true.
     this.enabled = true,
+    /// The duration of the press-scale animation. Defaults to 150ms.
     this.animationDuration = const Duration(milliseconds: 150),
   });
 
+  /// The label text displayed on the button.
   final String text;
+  /// The visual style variant.
   final AppButtonType type;
+  /// Called when the button is pressed.
   final VoidCallback? onTap;
+  /// The height of the button.
   final double? height;
+  /// The width of the button.
   final double? width;
+  /// Overrides the primary border/foreground color.
   final Color? primaryColor;
+  /// Overrides the secondary border/foreground color.
   final Color? secondaryColor;
+  /// Overrides the error border/foreground color.
   final Color? errorColor;
+  /// Overrides the text foreground color.
   final Color? textColor;
+  /// The text style applied to the button label.
   final TextStyle? textStyle;
+  /// The padding around the button content.
   final EdgeInsetsGeometry? padding;
+  /// The border radius of the button.
   final double? radius;
+  /// The width of the border stroke.
   final double borderWidth;
+  /// Whether to show a loading spinner in place of the label.
   final bool loading;
+  /// Whether the button is interactive.
   final bool enabled;
+  /// The duration of the press-scale animation.
   final Duration animationDuration;
 
   @override

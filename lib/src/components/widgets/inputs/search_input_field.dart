@@ -4,7 +4,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'input_item.dart';
 import 'validators.dart';
 
+/// A searchable dropdown field that opens a bottom sheet for item selection.
 class SearchInputField<T> extends HookWidget {
+  /// Creates a [SearchInputField].
   const SearchInputField({
     super.key,
     required this.items,
@@ -28,24 +30,43 @@ class SearchInputField<T> extends HookWidget {
     this.emptyText = 'No results found',
   });
 
+  /// The list of selectable items.
   final List<InputItem<T>> items;
+  /// Called when an item is selected from the bottom sheet.
   final ValueChanged<InputItem<T>> onSelected;
+  /// The controller for the text field.
   final TextEditingController? controller;
+  /// Placeholder text shown when the field is empty.
   final String? hintText;
+  /// The label text displayed above the field.
   final String? labelText;
+  /// A callback that validates the current field value.
   final ValidatorCallback? validator;
+  /// Whether the field is interactive.
   final bool enabled;
+  /// The border radius of the input.
   final double? borderRadius;
+  /// The fill color of the input decoration.
   final Color? fillColor;
+  /// The color of the enabled border.
   final Color? borderColor;
+  /// The color of the focused border.
   final Color? focusedBorderColor;
+  /// The color of the error border.
   final Color? errorBorderColor;
+  /// The style for the input text.
   final TextStyle? textStyle;
+  /// The style for the hint text.
   final TextStyle? hintStyle;
+  /// The style for the label text.
   final TextStyle? labelStyle;
+  /// The style for the error text.
   final TextStyle? errorStyle;
+  /// The padding inside the input decoration.
   final EdgeInsetsGeometry? contentPadding;
+  /// The hint text for the search field inside the bottom sheet.
   final String searchHint;
+  /// The text shown when no search results match.
   final String emptyText;
 
   @override
