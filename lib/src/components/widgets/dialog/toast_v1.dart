@@ -38,16 +38,21 @@ class ToastV1 extends StatelessWidget {
     this.onClose,
     this.title,
     this.duration,
+    super.key,
   });
 
   /// The message text displayed in the toast.
   final String message;
+
   /// The visual style variant of the toast.
   final ToastType type;
+
   /// Called when the close button is tapped. If null, the close button is hidden.
   final VoidCallback? onClose;
+
   /// An optional title displayed above the message.
   final String? title;
+
   /// The duration the toast should remain visible (for external use).
   final Duration? duration;
 
@@ -91,7 +96,10 @@ class ToastV1 extends StatelessWidget {
                   ),
                 Text(
                   message,
-                  style: TextStyle(color: fgColor.withValues(alpha: 0.9), fontSize: 13),
+                  style: TextStyle(
+                    color: fgColor.withValues(alpha: 0.9),
+                    fontSize: 13,
+                  ),
                 ),
               ],
             ),

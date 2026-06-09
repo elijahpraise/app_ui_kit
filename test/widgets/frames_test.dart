@@ -1,6 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ui_kit/flutter_ui_kit.dart';
 
 Widget boilerplate(Widget child) {
@@ -13,25 +12,25 @@ Widget boilerplate(Widget child) {
 void main() {
   group('IconFrame', () {
     testWidgets('renders icon', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const IconFrame(icon: Icon(Icons.star)),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const IconFrame(icon: Icon(Icons.star))),
+      );
 
       expect(find.byIcon(Icons.star), findsOneWidget);
     });
 
     testWidgets('renders with custom size', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const IconFrame(icon: Icon(Icons.star), size: 64),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const IconFrame(icon: Icon(Icons.star), size: 64)),
+      );
 
       expect(find.byIcon(Icons.star), findsOneWidget);
     });
 
     testWidgets('renders with custom radius', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const IconFrame(icon: Icon(Icons.star), radius: 16),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const IconFrame(icon: Icon(Icons.star), radius: 16)),
+      );
 
       expect(find.byType(Container), findsOneWidget);
     });
@@ -39,28 +38,27 @@ void main() {
 
   group('ListFrame', () {
     testWidgets('renders child', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ListFrame(child: Text('Content')),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const ListFrame(child: Text('Content'))),
+      );
 
       expect(find.text('Content'), findsOneWidget);
     });
 
     testWidgets('renders with custom padding', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ListFrame(
-          child: Text('Padded'),
-          padding: EdgeInsets.all(32),
+      await tester.pumpWidget(
+        boilerplate(
+          const ListFrame(padding: EdgeInsets.all(32), child: Text('Padded')),
         ),
-      ));
+      );
 
       expect(find.text('Padded'), findsOneWidget);
     });
 
     testWidgets('renders with elevation shadow', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ListFrame(child: Text('Elevated'), elevation: 4),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const ListFrame(elevation: 4, child: Text('Elevated'))),
+      );
 
       expect(find.text('Elevated'), findsOneWidget);
     });
@@ -74,9 +72,11 @@ void main() {
     });
 
     testWidgets('renders custom child', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ProfileFrame(child: Icon(Icons.admin_panel_settings)),
-      ));
+      await tester.pumpWidget(
+        boilerplate(
+          const ProfileFrame(child: Icon(Icons.admin_panel_settings)),
+        ),
+      );
 
       expect(find.byIcon(Icons.admin_panel_settings), findsOneWidget);
     });

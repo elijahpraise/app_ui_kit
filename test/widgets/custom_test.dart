@@ -1,6 +1,5 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_ui_kit/flutter_ui_kit.dart';
 
 Widget boilerplate(Widget child) {
@@ -15,7 +14,10 @@ void main() {
     testWidgets('renders with default size', (tester) async {
       await tester.pumpWidget(boilerplate(const Dot()));
 
-      final container = find.descendant(of: find.byType(Dot), matching: find.byType(Container));
+      final container = find.descendant(
+        of: find.byType(Dot),
+        matching: find.byType(Container),
+      );
       final size = tester.getSize(container);
       expect(size.width, 8);
       expect(size.height, 8);
@@ -24,7 +26,10 @@ void main() {
     testWidgets('renders with custom size', (tester) async {
       await tester.pumpWidget(boilerplate(const Dot(size: 16)));
 
-      final container = find.descendant(of: find.byType(Dot), matching: find.byType(Container));
+      final container = find.descendant(
+        of: find.byType(Dot),
+        matching: find.byType(Container),
+      );
       final size = tester.getSize(container);
       expect(size.width, 16);
     });
@@ -44,9 +49,9 @@ void main() {
     });
 
     testWidgets('renders with custom active color', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const Dot(active: true, color: Colors.red),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const Dot(active: true, color: Colors.red)),
+      );
 
       expect(find.byType(Container), findsOneWidget);
     });
@@ -54,56 +59,55 @@ void main() {
 
   group('InitialsDisplay', () {
     testWidgets('renders initials from full name', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const InitialsDisplay(name: 'John Doe'),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const InitialsDisplay(name: 'John Doe')),
+      );
 
       expect(find.text('JD'), findsOneWidget);
     });
 
     testWidgets('renders single initial for one name', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const InitialsDisplay(name: 'Alice'),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const InitialsDisplay(name: 'Alice')),
+      );
 
       expect(find.text('A'), findsOneWidget);
     });
 
     testWidgets('renders acronym when useAcronyms is true', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const InitialsDisplay(
-          name: 'International Business Machines',
-          useAcronyms: true,
-          maxLetters: 3,
+      await tester.pumpWidget(
+        boilerplate(
+          const InitialsDisplay(
+            name: 'International Business Machines',
+            useAcronyms: true,
+            maxLetters: 3,
+          ),
         ),
-      ));
+      );
 
       expect(find.text('IBM'), findsOneWidget);
     });
 
     testWidgets('respects maxLetters', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const InitialsDisplay(
-          name: 'John Michael Doe',
-          maxLetters: 1,
+      await tester.pumpWidget(
+        boilerplate(
+          const InitialsDisplay(name: 'John Michael Doe', maxLetters: 1),
         ),
-      ));
+      );
 
       expect(find.text('J'), findsOneWidget);
     });
 
     testWidgets('renders with custom size', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const InitialsDisplay(name: 'Test', size: 64),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const InitialsDisplay(name: 'Test', size: 64)),
+      );
 
       expect(find.byType(Container), findsOneWidget);
     });
 
     testWidgets('renders fallback for empty name', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const InitialsDisplay(name: ''),
-      ));
+      await tester.pumpWidget(boilerplate(const InitialsDisplay(name: '')));
 
       expect(find.text('?'), findsOneWidget);
     });
@@ -117,17 +121,15 @@ void main() {
     });
 
     testWidgets('renders vertical divider', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const DividerV1(vertical: true, height: 100),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const DividerV1(vertical: true, height: 100)),
+      );
 
       expect(find.byType(Container), findsOneWidget);
     });
 
     testWidgets('renders with custom thickness', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const DividerV1(thickness: 3),
-      ));
+      await tester.pumpWidget(boilerplate(const DividerV1(thickness: 3)));
 
       final divider = tester.widget<Divider>(find.byType(Divider));
       expect(divider.thickness, 3);
@@ -136,31 +138,29 @@ void main() {
 
   group('ListTileV1', () {
     testWidgets('renders title', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ListTileV1(title: Text('Item')),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const ListTileV1(title: Text('Item'))),
+      );
 
       expect(find.text('Item'), findsOneWidget);
     });
 
     testWidgets('renders subtitle', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ListTileV1(
-          title: Text('Item'),
-          subtitle: Text('Description'),
+      await tester.pumpWidget(
+        boilerplate(
+          const ListTileV1(title: Text('Item'), subtitle: Text('Description')),
         ),
-      ));
+      );
 
       expect(find.text('Description'), findsOneWidget);
     });
 
     testWidgets('renders leading icon', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ListTileV1(
-          title: Text('Item'),
-          leading: Icon(Icons.star),
+      await tester.pumpWidget(
+        boilerplate(
+          const ListTileV1(title: Text('Item'), leading: Icon(Icons.star)),
         ),
-      ));
+      );
 
       expect(find.byIcon(Icons.star), findsOneWidget);
     });
@@ -168,21 +168,20 @@ void main() {
     testWidgets('fires onTap', (tester) async {
       var tapped = false;
 
-      await tester.pumpWidget(boilerplate(
-        ListTileV1(
-          title: const Text('Item'),
-          onTap: () => tapped = true,
+      await tester.pumpWidget(
+        boilerplate(
+          ListTileV1(title: const Text('Item'), onTap: () => tapped = true),
         ),
-      ));
+      );
 
       await tester.tap(find.text('Item'));
       expect(tapped, isTrue);
     });
 
     testWidgets('renders with divider', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ListTileV1(title: Text('Item'), divider: true),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const ListTileV1(title: Text('Item'), divider: true)),
+      );
 
       expect(find.byType(Divider), findsOneWidget);
     });
@@ -190,13 +189,15 @@ void main() {
     testWidgets('does not fire onTap when disabled', (tester) async {
       var tapped = false;
 
-      await tester.pumpWidget(boilerplate(
-        ListTileV1(
-          title: const Text('Item'),
-          onTap: () => tapped = true,
-          enabled: false,
+      await tester.pumpWidget(
+        boilerplate(
+          ListTileV1(
+            title: const Text('Item'),
+            onTap: () => tapped = true,
+            enabled: false,
+          ),
         ),
-      ));
+      );
 
       await tester.tap(find.text('Item'));
       expect(tapped, isFalse);
@@ -205,24 +206,28 @@ void main() {
 
   group('ExpansionTileV1', () {
     testWidgets('renders title when collapsed', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ExpansionTileV1(
-          title: Text('Expand'),
-          children: [Text('Content')],
+      await tester.pumpWidget(
+        boilerplate(
+          const ExpansionTileV1(
+            title: Text('Expand'),
+            children: [Text('Content')],
+          ),
         ),
-      ));
+      );
 
       expect(find.text('Expand'), findsOneWidget);
       expect(find.text('Content'), findsNothing);
     });
 
     testWidgets('expands on tap', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ExpansionTileV1(
-          title: Text('Expand'),
-          children: [Text('Content')],
+      await tester.pumpWidget(
+        boilerplate(
+          const ExpansionTileV1(
+            title: Text('Expand'),
+            children: [Text('Content')],
+          ),
         ),
-      ));
+      );
 
       await tester.tap(find.text('Expand'));
       await tester.pumpAndSettle();
@@ -231,13 +236,15 @@ void main() {
     });
 
     testWidgets('expands initially when set', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const ExpansionTileV1(
-          title: Text('Expand'),
-          children: [Text('Content')],
-          initiallyExpanded: true,
+      await tester.pumpWidget(
+        boilerplate(
+          const ExpansionTileV1(
+            title: Text('Expand'),
+            initiallyExpanded: true,
+            children: [Text('Content')],
+          ),
         ),
-      ));
+      );
 
       expect(find.text('Content'), findsOneWidget);
     });
@@ -245,9 +252,9 @@ void main() {
 
   group('HyperLinkText', () {
     testWidgets('renders link text', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        HyperLinkText(text: 'Click here', onTap: () {}),
-      ));
+      await tester.pumpWidget(
+        boilerplate(HyperLinkText(text: 'Click here', onTap: () {})),
+      );
 
       expect(find.text('Click here'), findsOneWidget);
     });
@@ -255,9 +262,9 @@ void main() {
     testWidgets('fires onTap', (tester) async {
       var tapped = false;
 
-      await tester.pumpWidget(boilerplate(
-        HyperLinkText(text: 'Link', onTap: () => tapped = true),
-      ));
+      await tester.pumpWidget(
+        boilerplate(HyperLinkText(text: 'Link', onTap: () => tapped = true)),
+      );
 
       await tester.tap(find.text('Link'));
       expect(tapped, isTrue);
@@ -266,25 +273,25 @@ void main() {
 
   group('PasswordStrengthChecker', () {
     testWidgets('renders with weak password', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const PasswordStrengthChecker(password: 'abc'),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const PasswordStrengthChecker(password: 'abc')),
+      );
 
       expect(find.byType(LinearProgressIndicator), findsOneWidget);
     });
 
     testWidgets('renders with strong password', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const PasswordStrengthChecker(password: 'Abcd!2345xyz'),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const PasswordStrengthChecker(password: 'Abcd!2345xyz')),
+      );
 
       expect(find.byType(LinearProgressIndicator), findsOneWidget);
     });
 
     testWidgets('renders with empty password', (tester) async {
-      await tester.pumpWidget(boilerplate(
-        const PasswordStrengthChecker(password: ''),
-      ));
+      await tester.pumpWidget(
+        boilerplate(const PasswordStrengthChecker(password: '')),
+      );
 
       expect(find.byType(LinearProgressIndicator), findsOneWidget);
     });

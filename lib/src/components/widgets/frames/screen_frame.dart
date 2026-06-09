@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 /// A scrollable screen frame that wraps a child with padding, supporting
 /// fixed-height and unbounded scroll modes.
 class ScreenFrame extends StatelessWidget {
-  ScreenFrame({
+  const ScreenFrame({
     super.key,
     required this.child,
     this.padding,
@@ -37,19 +37,24 @@ class ScreenFrame extends StatelessWidget {
 
   /// The widget to display inside the scrollable frame.
   final Widget child;
+
   /// Padding around the child. Defaults to horizontal 16.w and vertical 8.h.
   final EdgeInsetsGeometry? padding;
+
   /// Optional scroll controller for the scroll view.
   final ScrollController? scrollController;
+
   /// Axis along which the content scrolls. Defaults to [Axis.vertical].
   final Axis scrollDirection;
+
   /// Whether to use slivers (CustomScrollView) in unbounded mode.
   final bool? useSlivers;
   final ScreenFrameMode _mode;
 
   @override
   Widget build(BuildContext context) {
-    final effectivePadding = padding ?? EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h);
+    final effectivePadding =
+        padding ?? EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h);
 
     switch (_mode) {
       case ScreenFrameMode.fixed:
@@ -58,10 +63,7 @@ class ScreenFrame extends StatelessWidget {
           scrollDirection: scrollDirection,
           child: SizedBox(
             height: context.frameSize().height,
-            child: Padding(
-              padding: effectivePadding,
-              child: child,
-            ),
+            child: Padding(padding: effectivePadding, child: child),
           ),
         );
       case ScreenFrameMode.unbounded:
