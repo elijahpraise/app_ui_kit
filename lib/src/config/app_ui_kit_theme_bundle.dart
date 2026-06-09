@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 /// Pre-resolved application themes for MaterialApp wiring.
-class FlutterUiKitThemeBundle {
+class AppUiKitThemeBundle {
   /// Creates a theme bundle with the required [lightTheme], [darkTheme], and [themeMode].
-  const FlutterUiKitThemeBundle({
+  const AppUiKitThemeBundle({
     required this.lightTheme,
     required this.darkTheme,
     required this.themeMode,

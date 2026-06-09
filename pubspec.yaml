@@ -1,7 +1,7 @@
-name: flutter_ui_kit
+name: app_ui_kit
 description: "A comprehensive Flutter UI kit with theming, components, and design presets."
 version: 0.0.1
-homepage: https://github.com/anomalyco/flutter_ui_kit
+homepage: https://github.com/anomalyco/app_ui_kit
 
 environment:
   sdk: ^3.7.0

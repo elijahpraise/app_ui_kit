@@ -1,29 +1,29 @@
-import 'flutter_ui_kit_config.dart';
-import 'flutter_ui_kit_theme_bundle.dart';
+import 'app_ui_kit_config.dart';
+import 'app_ui_kit_theme_bundle.dart';
 
 /// Global initializer for configuring the UI kit in host applications.
-class FlutterUiKit {
+class AppUiKit {
   /// Private constructor to prevent external instantiation.
-  FlutterUiKit._();
+  AppUiKit._();
 
-  static FlutterUiKitConfig _config = const FlutterUiKitConfig();
+  static AppUiKitConfig _config = const AppUiKitConfig();
   static bool _isInitialized = false;
 
   /// Current runtime configuration.
-  static FlutterUiKitConfig get config => _config;
+  static AppUiKitConfig get config => _config;
 
   /// Whether [initialize] has been called.
   static bool get isInitialized => _isInitialized;
 
   /// Initializes or replaces package configuration.
-  static void initialize({required FlutterUiKitConfig config}) {
+  static void initialize({required AppUiKitConfig config}) {
     _config = config;
     _isInitialized = true;
   }
 
   /// Updates current configuration based on the existing value.
   static void update(
-    FlutterUiKitConfig Function(FlutterUiKitConfig current) updater,
+    AppUiKitConfig Function(AppUiKitConfig current) updater,
   ) {
     _config = updater(_config);
     _isInitialized = true;
@@ -31,10 +31,10 @@ class FlutterUiKit {
 
   /// Resets configuration back to defaults.
   static void reset() {
-    _config = const FlutterUiKitConfig();
+    _config = const AppUiKitConfig();
     _isInitialized = false;
   }
 
   /// Resolved light/dark themes and theme mode for app-level wiring.
-  static FlutterUiKitThemeBundle get themes => _config.toThemeBundle();
+  static AppUiKitThemeBundle get themes => _config.toThemeBundle();
 }

@@ -4,7 +4,7 @@ import '../theme/design_preset.dart';
 ///
 /// Maps 1:1 to [DesignPreset] values used by [AppTheme.build].
 /// Use [toDesignPreset] to convert when calling theme APIs directly.
-enum FlutterUiKitPreset {
+enum AppUiKitPreset {
   /// Balanced defaults suitable for most products.
   baseline,
 
@@ -42,23 +42,23 @@ enum FlutterUiKitPreset {
   raycast,
 }
 
-extension FlutterUiKitPresetX on FlutterUiKitPreset {
+extension AppUiKitPresetX on AppUiKitPreset {
   /// Converts this config-level preset to the equivalent [DesignPreset]
   /// used by [AppTheme.build] and the component library.
   DesignPreset toDesignPreset() {
     return switch (this) {
-      FlutterUiKitPreset.baseline => DesignPreset.defaultPreset,
-      FlutterUiKitPreset.vercel => DesignPreset.vercel,
-      FlutterUiKitPreset.airbnb => DesignPreset.airbnb,
-      FlutterUiKitPreset.apple => DesignPreset.apple,
-      FlutterUiKitPreset.spotify => DesignPreset.spotify,
-      FlutterUiKitPreset.vibrant => DesignPreset.vibrant,
-      FlutterUiKitPreset.highContrast => DesignPreset.highContrast,
-      FlutterUiKitPreset.starbucks => DesignPreset.starbucks,
-      FlutterUiKitPreset.linear => DesignPreset.linear,
-      FlutterUiKitPreset.notion => DesignPreset.notion,
-      FlutterUiKitPreset.mongodb => DesignPreset.mongodb,
-      FlutterUiKitPreset.raycast => DesignPreset.raycast,
+      AppUiKitPreset.baseline => DesignPreset.defaultPreset,
+      AppUiKitPreset.vercel => DesignPreset.vercel,
+      AppUiKitPreset.airbnb => DesignPreset.airbnb,
+      AppUiKitPreset.apple => DesignPreset.apple,
+      AppUiKitPreset.spotify => DesignPreset.spotify,
+      AppUiKitPreset.vibrant => DesignPreset.vibrant,
+      AppUiKitPreset.highContrast => DesignPreset.highContrast,
+      AppUiKitPreset.starbucks => DesignPreset.starbucks,
+      AppUiKitPreset.linear => DesignPreset.linear,
+      AppUiKitPreset.notion => DesignPreset.notion,
+      AppUiKitPreset.mongodb => DesignPreset.mongodb,
+      AppUiKitPreset.raycast => DesignPreset.raycast,
     };
   }
 }

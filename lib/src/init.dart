@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../flutter_ui_kit.dart' as cfg;
+import '../app_ui_kit.dart' as cfg;
 import 'theme/design_preset.dart';
 import 'theme/themes/app_theme.dart';
 
@@ -97,7 +97,7 @@ extension FlutterUIKitContext on BuildContext {
   FlutterUIKitConfig get uiKitConfig {
     final config = FlutterUIKit.maybeConfigOf(this);
     if (config != null) return config;
-    final cfgConfig = cfg.FlutterUiKit.config;
+    final cfgConfig = cfg.AppUiKit.config;
     return FlutterUIKitConfig(
       preset: DesignPreset.defaultPreset,
       lightTheme: cfgConfig.lightTheme,

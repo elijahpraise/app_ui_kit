@@ -1,7 +1,7 @@
 /// Design presets that define color palettes, typography, and radii.
 ///
 /// These are the core theme identifiers consumed by [AppTheme.build].
-/// For the equivalent config-layer enum see [FlutterUiKitPreset].
+/// For the equivalent config-layer enum see [AppUiKitPreset].
 ///
 /// {@category Theme}
 enum DesignPreset {

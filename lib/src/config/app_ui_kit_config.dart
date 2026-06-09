@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'flutter_ui_kit_preset.dart';
-import 'flutter_ui_kit_theme_bundle.dart';
+import 'app_ui_kit_preset.dart';
+import 'app_ui_kit_theme_bundle.dart';
 
-/// Signature for building custom [ThemeData] from a [Brightness] and [FlutterUiKitConfig].
-typedef FlutterUiKitThemeBuilder = ThemeData Function(
+/// Signature for building custom [ThemeData] from a [Brightness] and [AppUiKitConfig].
+typedef AppUiKitThemeBuilder = ThemeData Function(
   Brightness brightness,
-  FlutterUiKitConfig config,
+  AppUiKitConfig config,
 );
 
 /// Config contract supplied by host applications when initializing the package.
-class FlutterUiKitConfig {
-  /// Creates a [FlutterUiKitConfig] with default values and optional overrides.
-  const FlutterUiKitConfig({
+class AppUiKitConfig {
+  /// Creates a [AppUiKitConfig] with default values and optional overrides.
+  const AppUiKitConfig({
     this.fontFamily,
-    this.preset = FlutterUiKitPreset.baseline,
+    this.preset = AppUiKitPreset.baseline,
     this.themeMode = ThemeMode.system,
     this.lightTheme,
     this.darkTheme,
@@ -28,7 +28,7 @@ class FlutterUiKitConfig {
   final String? fontFamily;
 
   /// Quick preset for default visual style.
-  final FlutterUiKitPreset preset;
+  final AppUiKitPreset preset;
 
   /// Default theme mode to use in the host app.
   final ThemeMode themeMode;
@@ -46,7 +46,7 @@ class FlutterUiKitConfig {
   final ColorScheme? darkColorScheme;
 
   /// Optional custom builder for generating themes.
-  final FlutterUiKitThemeBuilder? themeBuilder;
+  final AppUiKitThemeBuilder? themeBuilder;
 
   /// Extra host-defined tokens for UI needs not covered by core fields.
   final Map<String, Object?> uiTokens;
@@ -67,8 +67,8 @@ class FlutterUiKitConfig {
   ThemeData get resolvedDarkTheme => _resolveTheme(Brightness.dark);
 
   /// Builds a theme bundle for easy integration with [MaterialApp].
-  FlutterUiKitThemeBundle toThemeBundle() {
-    return FlutterUiKitThemeBundle(
+  AppUiKitThemeBundle toThemeBundle() {
+    return AppUiKitThemeBundle(
       lightTheme: resolvedLightTheme,
       darkTheme: resolvedDarkTheme,
       themeMode: themeMode,
@@ -76,18 +76,18 @@ class FlutterUiKitConfig {
   }
 
   /// Returns a copy of this config with the given fields replaced by new values.
-  FlutterUiKitConfig copyWith({
+  AppUiKitConfig copyWith({
     String? fontFamily,
-    FlutterUiKitPreset? preset,
+    AppUiKitPreset? preset,
     ThemeMode? themeMode,
     ThemeData? lightTheme,
     ThemeData? darkTheme,
     ColorScheme? lightColorScheme,
     ColorScheme? darkColorScheme,
-    FlutterUiKitThemeBuilder? themeBuilder,
+    AppUiKitThemeBuilder? themeBuilder,
     Map<String, Object?>? uiTokens,
   }) {
-    return FlutterUiKitConfig(
+    return AppUiKitConfig(
       fontFamily: fontFamily ?? this.fontFamily,
       preset: preset ?? this.preset,
       themeMode: themeMode ?? this.themeMode,
@@ -124,13 +124,13 @@ class FlutterUiKitConfig {
     );
 
     switch (preset) {
-      case FlutterUiKitPreset.baseline:
+      case AppUiKitPreset.baseline:
         return baseTheme;
-      case FlutterUiKitPreset.vercel:
+      case AppUiKitPreset.vercel:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.compact,
         );
-      case FlutterUiKitPreset.airbnb:
+      case AppUiKitPreset.airbnb:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.comfortable,
           cardTheme: CardTheme(
@@ -139,7 +139,7 @@ class FlutterUiKitConfig {
             ),
           ),
         );
-      case FlutterUiKitPreset.apple:
+      case AppUiKitPreset.apple:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.comfortable,
           cardTheme: CardTheme(
@@ -148,11 +148,11 @@ class FlutterUiKitConfig {
             ),
           ),
         );
-      case FlutterUiKitPreset.vibrant:
+      case AppUiKitPreset.vibrant:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.comfortable,
         );
-      case FlutterUiKitPreset.highContrast:
+      case AppUiKitPreset.highContrast:
         return baseTheme.copyWith(
           colorScheme: colorScheme.copyWith(
             onPrimary: brightness == Brightness.dark
@@ -163,7 +163,7 @@ class FlutterUiKitConfig {
                 : Colors.white,
           ),
         );
-      case FlutterUiKitPreset.spotify:
+      case AppUiKitPreset.spotify:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.compact,
           cardTheme: CardTheme(
@@ -175,7 +175,7 @@ class FlutterUiKitConfig {
             ),
           ),
         );
-      case FlutterUiKitPreset.starbucks:
+      case AppUiKitPreset.starbucks:
         return baseTheme.copyWith(
           scaffoldBackgroundColor: brightness == Brightness.light
               ? const Color(0xFFF2F0EB)
@@ -186,7 +186,7 @@ class FlutterUiKitConfig {
             ),
           ),
         );
-      case FlutterUiKitPreset.linear:
+      case AppUiKitPreset.linear:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.compact,
           scaffoldBackgroundColor: brightness == Brightness.dark
@@ -196,7 +196,7 @@ class FlutterUiKitConfig {
               ? const Color(0xFF23252A)
               : baseTheme.dividerColor,
         );
-      case FlutterUiKitPreset.notion:
+      case AppUiKitPreset.notion:
         return baseTheme.copyWith(
           scaffoldBackgroundColor: brightness == Brightness.light
               ? const Color(0xFFF6F5F4)
@@ -205,14 +205,14 @@ class FlutterUiKitConfig {
               ? const Color(0xFFE6E6E6)
               : baseTheme.dividerColor,
         );
-      case FlutterUiKitPreset.mongodb:
+      case AppUiKitPreset.mongodb:
         return baseTheme.copyWith(
           scaffoldBackgroundColor: brightness == Brightness.dark
               ? const Color(0xFF001E2B)
               : baseTheme.scaffoldBackgroundColor,
           visualDensity: VisualDensity.standard,
         );
-      case FlutterUiKitPreset.raycast:
+      case AppUiKitPreset.raycast:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.compact,
           scaffoldBackgroundColor: brightness == Brightness.dark
@@ -241,41 +241,41 @@ class FlutterUiKitConfig {
   }
 
   Color _seedColorForPreset(
-    FlutterUiKitPreset currentPreset,
+    AppUiKitPreset currentPreset,
     Brightness brightness,
   ) {
     switch (currentPreset) {
-      case FlutterUiKitPreset.baseline:
+      case AppUiKitPreset.baseline:
         return const Color(0xFF4F46E5);
-      case FlutterUiKitPreset.vercel:
+      case AppUiKitPreset.vercel:
         return brightness == Brightness.dark
             ? const Color(0xFFFFFFFF)
             : const Color(0xFF000000);
-      case FlutterUiKitPreset.airbnb:
+      case AppUiKitPreset.airbnb:
         return const Color(0xFFFF385C);
-      case FlutterUiKitPreset.apple:
+      case AppUiKitPreset.apple:
         return const Color(0xFF007AFF);
-      case FlutterUiKitPreset.vibrant:
+      case AppUiKitPreset.vibrant:
         return brightness == Brightness.dark
             ? const Color(0xFFE879F9)
             : const Color(0xFF7C3AED);
-      case FlutterUiKitPreset.highContrast:
+      case AppUiKitPreset.highContrast:
         return brightness == Brightness.dark
             ? const Color(0xFF22D3EE)
             : const Color(0xFF0F172A);
-      case FlutterUiKitPreset.spotify:
+      case AppUiKitPreset.spotify:
         return const Color(0xFF1ED760);
-      case FlutterUiKitPreset.starbucks:
+      case AppUiKitPreset.starbucks:
         return brightness == Brightness.dark
             ? const Color(0xFF1E3932)
             : const Color(0xFF006241);
-      case FlutterUiKitPreset.linear:
+      case AppUiKitPreset.linear:
         return const Color(0xFF5E6AD2);
-      case FlutterUiKitPreset.notion:
+      case AppUiKitPreset.notion:
         return const Color(0xFF0075DE);
-      case FlutterUiKitPreset.mongodb:
+      case AppUiKitPreset.mongodb:
         return const Color(0xFF00ED64);
-      case FlutterUiKitPreset.raycast:
+      case AppUiKitPreset.raycast:
         return brightness == Brightness.dark
             ? const Color(0xFFF4F4F6)
             : const Color(0xFF0D0D0D);

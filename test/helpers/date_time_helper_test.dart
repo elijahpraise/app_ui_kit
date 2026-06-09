@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_ui_kit/flutter_ui_kit.dart';
+import 'package:app_ui_kit/app_ui_kit.dart';
 
 void main() {
   group('DateTimeHelper', () {
