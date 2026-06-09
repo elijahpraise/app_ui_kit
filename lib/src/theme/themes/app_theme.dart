@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../color_values.dart';
 import '../design_preset.dart';
@@ -17,6 +18,26 @@ import '../presets/vibrant_preset.dart';
 
 class AppTheme {
   AppTheme._();
+
+  static bool? _gfAvailable;
+
+  static bool get _canUseGoogleFonts {
+    if (_gfAvailable == null) {
+      try {
+        WidgetsBinding.instance;
+        _gfAvailable = true;
+      } catch (_) {
+        _gfAvailable = false;
+      }
+    }
+    return _gfAvailable!;
+  }
+
+  static TextStyle _gf(String? fontFamily, TextStyle base) {
+    if (fontFamily == null) return base;
+    if (!_canUseGoogleFonts) return base.copyWith(fontFamily: fontFamily);
+    return GoogleFonts.getFont(fontFamily, textStyle: base);
+  }
 
   static ThemeData build({
     required DesignPreset preset,
@@ -51,12 +72,11 @@ class AppTheme {
         elevation: 0,
         scrolledUnderElevation: 0.5,
         centerTitle: false,
-        titleTextStyle: TextStyle(
-          fontFamily: family,
+        titleTextStyle: _gf(family, TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
           color: appColors.onSurface,
-        ),
+        )),
         iconTheme: IconThemeData(color: appColors.onSurface),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -67,11 +87,10 @@ class AppTheme {
           disabledForegroundColor: appColors.onPrimary.withValues(alpha: 0.6),
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          textStyle: TextStyle(
-            fontFamily: family,
+          textStyle: _gf(family, const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-          ),
+          )),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radii),
           ),
@@ -83,11 +102,10 @@ class AppTheme {
           disabledForegroundColor: appColors.onSurface.withValues(alpha: 0.4),
           side: BorderSide(color: appColors.border),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          textStyle: TextStyle(
-            fontFamily: family,
+          textStyle: _gf(family, const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-          ),
+          )),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radii),
           ),
@@ -98,11 +116,10 @@ class AppTheme {
           foregroundColor: appColors.primary,
           disabledForegroundColor: appColors.onSurface.withValues(alpha: 0.4),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          textStyle: TextStyle(
-            fontFamily: family,
+          textStyle: _gf(family, const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w600,
-          ),
+          )),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
@@ -111,23 +128,20 @@ class AppTheme {
             ? appColors.surface
             : appColors.onSurfaceLight,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        hintStyle: TextStyle(
-          fontFamily: family,
+        hintStyle: _gf(family, TextStyle(
           fontSize: 14,
           color: appColors.inputLabel,
-        ),
-        labelStyle: TextStyle(
-          fontFamily: family,
+        )),
+        labelStyle: _gf(family, TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
           color: appColors.inputLabel,
-        ),
-        floatingLabelStyle: TextStyle(
-          fontFamily: family,
+        )),
+        floatingLabelStyle: _gf(family, TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
           color: appColors.primary,
-        ),
+        )),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(radii - 2),
           borderSide: BorderSide(color: appColors.border),
@@ -152,11 +166,10 @@ class AppTheme {
           borderRadius: BorderRadius.circular(radii - 2),
           borderSide: BorderSide(color: appColors.border.withValues(alpha: 0.5)),
         ),
-        errorStyle: TextStyle(
-          fontFamily: family,
+        errorStyle: _gf(family, TextStyle(
           fontSize: 12,
           color: appColors.error,
-        ),
+        )),
       ),
       cardTheme: CardThemeData(
         color: appColors.surface,
@@ -173,17 +186,15 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radii + 8),
         ),
-        titleTextStyle: TextStyle(
-          fontFamily: family,
+        titleTextStyle: _gf(family, TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
           color: appColors.onSurface,
-        ),
-        contentTextStyle: TextStyle(
-          fontFamily: family,
+        )),
+        contentTextStyle: _gf(family, TextStyle(
           fontSize: 14,
           color: appColors.onSurface.withValues(alpha: 0.8),
-        ),
+        )),
       ),
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: appColors.dialogSurface,
@@ -196,11 +207,10 @@ class AppTheme {
       ),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: appColors.onSurfaceDark,
-        contentTextStyle: TextStyle(
-          fontFamily: family,
+        contentTextStyle: _gf(family, TextStyle(
           fontSize: 14,
           color: appColors.onSurfaceWhite,
-        ),
+        )),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radii - 2),
         ),
@@ -211,19 +221,17 @@ class AppTheme {
         indicatorColor: appColors.primary.withValues(alpha: 0.12),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
-            return TextStyle(
-              fontFamily: family,
+            return _gf(family, TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w600,
               color: appColors.primary,
-            );
+            ));
           }
-          return TextStyle(
-            fontFamily: family,
+          return _gf(family, TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w500,
             color: appColors.onSurface.withValues(alpha: 0.6),
-          );
+          ));
         }),
         iconTheme: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
@@ -238,26 +246,23 @@ class AppTheme {
       tabBarTheme: TabBarThemeData(
         labelColor: appColors.primary,
         unselectedLabelColor: appColors.onSurface.withValues(alpha: 0.6),
-        labelStyle: TextStyle(
-          fontFamily: family,
+        labelStyle: _gf(family, const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-        ),
-        unselectedLabelStyle: TextStyle(
-          fontFamily: family,
+        )),
+        unselectedLabelStyle: _gf(family, const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
-        ),
+        )),
         indicatorColor: appColors.primary,
         indicatorSize: TabBarIndicatorSize.tab,
       ),
       chipTheme: ChipThemeData(
         backgroundColor: appColors.onSurfaceLight,
-        labelStyle: TextStyle(
-          fontFamily: family,
+        labelStyle: _gf(family, TextStyle(
           fontSize: 13,
           color: appColors.onSurface,
-        ),
+        )),
         side: BorderSide(color: appColors.border),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radii - 2),
@@ -309,11 +314,10 @@ class AppTheme {
         thumbColor: appColors.primary,
         overlayColor: appColors.primary.withValues(alpha: 0.12),
         valueIndicatorColor: appColors.primary,
-        valueIndicatorTextStyle: TextStyle(
-          fontFamily: family,
+        valueIndicatorTextStyle: _gf(family, TextStyle(
           fontSize: 12,
           color: appColors.onPrimary,
-        ),
+        )),
       ),
       popupMenuTheme: PopupMenuThemeData(
         color: appColors.dialogSurface,
@@ -321,11 +325,10 @@ class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radii - 2),
         ),
-        textStyle: TextStyle(
-          fontFamily: family,
+        textStyle: _gf(family, TextStyle(
           fontSize: 14,
           color: appColors.onSurface,
-        ),
+        )),
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(
         color: appColors.primary,
@@ -337,11 +340,10 @@ class AppTheme {
           color: appColors.onSurfaceDark,
           borderRadius: BorderRadius.circular(radii - 4),
         ),
-        textStyle: TextStyle(
-          fontFamily: family,
+        textStyle: _gf(family, TextStyle(
           fontSize: 12,
           color: appColors.onSurfaceWhite,
-        ),
+        )),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -361,22 +363,19 @@ class AppTheme {
         collapsedShape: const Border(),
       ),
       listTileTheme: ListTileThemeData(
-        titleTextStyle: TextStyle(
-          fontFamily: family,
+        titleTextStyle: _gf(family, TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w500,
           color: appColors.onSurface,
-        ),
-        subtitleTextStyle: TextStyle(
-          fontFamily: family,
+        )),
+        subtitleTextStyle: _gf(family, TextStyle(
           fontSize: 13,
           color: appColors.inputLabel,
-        ),
-        leadingAndTrailingTextStyle: TextStyle(
-          fontFamily: family,
+        )),
+        leadingAndTrailingTextStyle: _gf(family, TextStyle(
           fontSize: 14,
           color: appColors.onSurface,
-        ),
+        )),
         iconColor: appColors.onSurface,
         textColor: appColors.onSurface,
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -402,11 +401,10 @@ class AppTheme {
       badgeTheme: BadgeThemeData(
         backgroundColor: appColors.primary,
         textColor: appColors.onPrimary,
-        textStyle: TextStyle(
-          fontFamily: family,
+        textStyle: _gf(family, const TextStyle(
           fontSize: 11,
           fontWeight: FontWeight.w600,
-        ),
+        )),
       ),
       searchBarTheme: SearchBarThemeData(
         backgroundColor: WidgetStatePropertyAll(
@@ -421,16 +419,14 @@ class AppTheme {
             borderRadius: BorderRadius.circular(radii),
           ),
         ),
-        textStyle: WidgetStatePropertyAll(TextStyle(
-          fontFamily: family,
+        textStyle: WidgetStatePropertyAll(_gf(family, TextStyle(
           fontSize: 14,
           color: appColors.inputText,
-        )),
-        hintStyle: WidgetStatePropertyAll(TextStyle(
-          fontFamily: family,
+        ))),
+        hintStyle: WidgetStatePropertyAll(_gf(family, TextStyle(
           fontSize: 14,
           color: appColors.inputLabel,
-        )),
+        ))),
       ),
       datePickerTheme: DatePickerThemeData(
         backgroundColor: appColors.dialogSurface,
@@ -553,85 +549,32 @@ class AppTheme {
   }
 
   static TextTheme _buildTextTheme(String? fontFamily) {
+    TextStyle _st(double size, FontWeight weight, {double? letterSpacing = 0}) {
+      final base = TextStyle(fontSize: size, fontWeight: weight, letterSpacing: letterSpacing);
+      if (fontFamily == null) return base;
+      try {
+        return GoogleFonts.getFont(fontFamily, textStyle: base);
+      } catch (_) {
+        return base.copyWith(fontFamily: fontFamily);
+      }
+    }
+
     return TextTheme(
-      displayLarge: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 32,
-        fontWeight: FontWeight.bold,
-        letterSpacing: -0.5,
-      ),
-      displayMedium: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-        letterSpacing: -0.25,
-      ),
-      displaySmall: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 24,
-        fontWeight: FontWeight.w600,
-      ),
-      headlineLarge: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 22,
-        fontWeight: FontWeight.w600,
-      ),
-      headlineMedium: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-      ),
-      headlineSmall: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-      ),
-      titleLarge: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-      ),
-      titleMedium: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-      titleSmall: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
-      ),
-      bodyLarge: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
-      ),
-      bodyMedium: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 14,
-        fontWeight: FontWeight.normal,
-      ),
-      bodySmall: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 12,
-        fontWeight: FontWeight.normal,
-      ),
-      labelLarge: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 14,
-        fontWeight: FontWeight.w600,
-      ),
-      labelMedium: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 12,
-        fontWeight: FontWeight.w500,
-      ),
-      labelSmall: TextStyle(
-        fontFamily: fontFamily,
-        fontSize: 10,
-        fontWeight: FontWeight.w500,
-        letterSpacing: 1.5,
-      ),
+      displayLarge: _st(32, FontWeight.bold, letterSpacing: -0.5),
+      displayMedium: _st(28, FontWeight.bold, letterSpacing: -0.25),
+      displaySmall: _st(24, FontWeight.w600),
+      headlineLarge: _st(22, FontWeight.w600),
+      headlineMedium: _st(20, FontWeight.w600),
+      headlineSmall: _st(18, FontWeight.w600),
+      titleLarge: _st(18, FontWeight.w500),
+      titleMedium: _st(16, FontWeight.w500),
+      titleSmall: _st(14, FontWeight.w500),
+      bodyLarge: _st(16, FontWeight.normal),
+      bodyMedium: _st(14, FontWeight.normal),
+      bodySmall: _st(12, FontWeight.normal),
+      labelLarge: _st(14, FontWeight.w600),
+      labelMedium: _st(12, FontWeight.w500),
+      labelSmall: _st(10, FontWeight.w500, letterSpacing: 1.5),
     );
   }
 }
