@@ -10,6 +10,7 @@ class IconFrame extends StatelessWidget {
     this.backgroundColor,
     this.radius,
     this.alignment,
+    this.animationDuration = const Duration(milliseconds: 200),
   });
 
   final Widget icon;
@@ -19,6 +20,7 @@ class IconFrame extends StatelessWidget {
   final Color? backgroundColor;
   final double? radius;
   final Alignment? alignment;
+  final Duration animationDuration;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,9 @@ class IconFrame extends StatelessWidget {
     final effectiveSize = size ?? 40;
     final effectiveRadius = radius ?? 8;
 
-    return Container(
+    return AnimatedContainer(
+      duration: animationDuration,
+      curve: Curves.easeOut,
       width: effectiveSize,
       height: effectiveSize,
       alignment: alignment ?? Alignment.center,

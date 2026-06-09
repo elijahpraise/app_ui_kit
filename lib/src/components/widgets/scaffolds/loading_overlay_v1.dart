@@ -10,6 +10,7 @@ class LoadingOverlayV1 extends StatelessWidget {
     this.indicator,
     this.opacity,
     this.color,
+    this.animationDuration = const Duration(milliseconds: 200),
   });
 
   final bool isLoading;
@@ -17,6 +18,7 @@ class LoadingOverlayV1 extends StatelessWidget {
   final Widget? indicator;
   final double? opacity;
   final Color? color;
+  final Duration animationDuration;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +27,24 @@ class LoadingOverlayV1 extends StatelessWidget {
     return Stack(
       children: [
         child,
-        if (isLoading)
-          Positioned.fill(
-            child: Container(
-              color: color ?? Colors.black.withValues(alpha: opacity ?? 0.3),
-              child: indicator ?? LoadingIndicator(color: theme.colorScheme.primary),
+        Positioned.fill(
+          child: AnimatedOpacity(
+            opacity: isLoading ? 1.0 : 0.0,
+            duration: animationDuration,
+            curve: Curves.easeOut,
+            child: IgnorePointer(
+              ignoring: !isLoading,
+              child: AnimatedContainer(
+                duration: animationDuration,
+                curve: Curves.easeOut,
+                color: color ?? Colors.black.withValues(alpha: opacity ?? 0.3),
+                child: isLoading
+                    ? (indicator ?? LoadingIndicator(color: theme.colorScheme.primary))
+                    : null,
+              ),
             ),
           ),
+        ),
       ],
     );
   }
@@ -45,6 +58,7 @@ class LoadingOverlay extends StatelessWidget {
     this.indicator,
     this.opacity = 0.3,
     this.color,
+    this.animationDuration = const Duration(milliseconds: 200),
   });
 
   final bool isLoading;
@@ -52,19 +66,31 @@ class LoadingOverlay extends StatelessWidget {
   final Widget? indicator;
   final double? opacity;
   final Color? color;
+  final Duration animationDuration;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    if (!isLoading) return child;
 
     return Stack(
       children: [
         child,
         Positioned.fill(
-          child: Container(
-            color: color ?? Colors.black.withValues(alpha: opacity ?? 0.3),
-            child: indicator ?? LoadingIndicator(color: theme.colorScheme.primary),
+          child: AnimatedOpacity(
+            opacity: isLoading ? 1.0 : 0.0,
+            duration: animationDuration,
+            curve: Curves.easeOut,
+            child: IgnorePointer(
+              ignoring: !isLoading,
+              child: AnimatedContainer(
+                duration: animationDuration,
+                curve: Curves.easeOut,
+                color: color ?? Colors.black.withValues(alpha: opacity ?? 0.3),
+                child: isLoading
+                    ? (indicator ?? LoadingIndicator(color: theme.colorScheme.primary))
+                    : null,
+              ),
+            ),
           ),
         ),
       ],

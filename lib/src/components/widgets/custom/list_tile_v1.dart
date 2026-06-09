@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ListTileV1 extends StatelessWidget {
+class ListTileV1 extends StatefulWidget {
   const ListTileV1({
     super.key,
     required this.title,
@@ -20,6 +20,7 @@ class ListTileV1 extends StatelessWidget {
     this.radius,
     this.borderColor,
     this.divider = false,
+    this.animationDuration = const Duration(milliseconds: 150),
   });
 
   final Widget title;
@@ -39,42 +40,71 @@ class ListTileV1 extends StatelessWidget {
   final double? radius;
   final Color? borderColor;
   final bool divider;
+  final Duration animationDuration;
+
+  @override
+  State<ListTileV1> createState() => _ListTileV1State();
+}
+
+class _ListTileV1State extends State<ListTileV1> {
+  bool _pressed = false;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final tileTheme = theme.listTileTheme;
 
-    return Container(
+    final bgColor = widget.backgroundColor ?? Colors.transparent;
+    final pressedColor = widget.onTap != null && widget.enabled
+        ? theme.colorScheme.onSurface.withValues(alpha: 0.05)
+        : bgColor;
+
+    return AnimatedContainer(
+      duration: widget.animationDuration,
+      curve: Curves.easeOut,
       decoration: BoxDecoration(
-        color: backgroundColor ?? Colors.transparent,
-        borderRadius: radius != null ? BorderRadius.circular(radius!) : null,
-        border: borderColor != null
-            ? Border.all(color: borderColor!)
+        color: _pressed ? pressedColor : bgColor,
+        borderRadius: widget.radius != null ? BorderRadius.circular(widget.radius!) : null,
+        border: widget.borderColor != null
+            ? Border.all(color: widget.borderColor!)
             : null,
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ListTile(
-            title: title,
-            subtitle: subtitle,
-            leading: leading,
-            trailing: trailing,
-            onTap: enabled ? onTap : null,
-            onLongPress: enabled ? onLongPress : null,
-            dense: dense,
-            selected: selected,
-            titleTextStyle: titleStyle ?? tileTheme.titleTextStyle,
-            subtitleTextStyle: subtitleStyle ?? tileTheme.subtitleTextStyle,
-            leadingAndTrailingTextStyle: tileTheme.leadingAndTrailingTextStyle,
-            contentPadding: contentPadding ?? tileTheme.contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-            iconColor: tileTheme.iconColor,
-            textColor: tileTheme.textColor,
-          ),
-          if (divider)
-            Divider(height: 1, color: theme.dividerColor, indent: 16, endIndent: 16),
-        ],
+      child: Listener(
+        onPointerDown: widget.onTap != null && widget.enabled
+            ? (_) => setState(() => _pressed = true)
+            : null,
+        onPointerUp: (_) => setState(() => _pressed = false),
+        onPointerCancel: (_) => setState(() => _pressed = false),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AnimatedPadding(
+              duration: widget.animationDuration,
+              curve: Curves.easeOut,
+              padding: _pressed
+                  ? const EdgeInsets.only(left: 4)
+                  : EdgeInsets.zero,
+              child: ListTile(
+                title: widget.title,
+                subtitle: widget.subtitle,
+                leading: widget.leading,
+                trailing: widget.trailing,
+                onTap: widget.enabled ? widget.onTap : null,
+                onLongPress: widget.enabled ? widget.onLongPress : null,
+                dense: widget.dense,
+                selected: widget.selected,
+                titleTextStyle: widget.titleStyle ?? tileTheme.titleTextStyle,
+                subtitleTextStyle: widget.subtitleStyle ?? tileTheme.subtitleTextStyle,
+                leadingAndTrailingTextStyle: tileTheme.leadingAndTrailingTextStyle,
+                contentPadding: widget.contentPadding ?? tileTheme.contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                iconColor: tileTheme.iconColor,
+                textColor: tileTheme.textColor,
+              ),
+            ),
+            if (widget.divider)
+              Divider(height: 1, color: theme.dividerColor, indent: 16, endIndent: 16),
+          ],
+        ),
       ),
     );
   }

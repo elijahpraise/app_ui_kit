@@ -10,6 +10,7 @@ class ListFrame extends StatelessWidget {
     this.radius,
     this.borderColor,
     this.elevation,
+    this.animationDuration = const Duration(milliseconds: 200),
   });
 
   final Widget child;
@@ -19,12 +20,15 @@ class ListFrame extends StatelessWidget {
   final double? radius;
   final Color? borderColor;
   final double? elevation;
+  final Duration animationDuration;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
+    return AnimatedContainer(
+      duration: animationDuration,
+      curve: Curves.easeOut,
       margin: margin ?? EdgeInsets.zero,
       decoration: BoxDecoration(
         color: backgroundColor ?? theme.colorScheme.surface,

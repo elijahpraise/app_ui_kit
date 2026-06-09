@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../foundation/platform.dart';
 import 'app_button_type.dart';
 
-class AppTextButton extends StatelessWidget {
+class AppTextButton extends StatefulWidget {
   const AppTextButton({
     super.key,
     required this.text,
@@ -20,6 +20,7 @@ class AppTextButton extends StatelessWidget {
     this.padding,
     this.loading = false,
     this.enabled = true,
+    this.animationDuration = const Duration(milliseconds: 150),
   });
 
   final String text;
@@ -35,50 +36,85 @@ class AppTextButton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
   final bool loading;
   final bool enabled;
+  final Duration animationDuration;
+
+  @override
+  State<AppTextButton> createState() => _AppTextButtonState();
+}
+
+class _AppTextButtonState extends State<AppTextButton> {
+  bool _pressed = false;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
-    final fgColor = textColor ?? switch (type) {
-      AppButtonType.primary => primaryColor ?? cs.primary,
-      AppButtonType.secondary => secondaryColor ?? cs.secondary,
-      AppButtonType.error => errorColor ?? cs.error,
+    final fgColor = widget.textColor ?? switch (widget.type) {
+      AppButtonType.primary => widget.primaryColor ?? cs.primary,
+      AppButtonType.secondary => widget.secondaryColor ?? cs.secondary,
+      AppButtonType.error => widget.errorColor ?? cs.error,
     };
 
-    if (isCupertino) {
-      return cupertino.CupertinoButton(
-        onPressed: enabled && !loading ? onTap : null,
-        padding: padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        color: Colors.transparent,
-        disabledColor: Colors.transparent,
-        child: loading
-            ? SizedBox(
-                width: 20, height: 20,
-                child: cupertino.CupertinoActivityIndicator(radius: 10, color: fgColor),
-              )
-            : Text(text, style: textStyle ?? TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: fgColor)),
-      );
-    }
-
-    return SizedBox(
-      width: width,
-      height: height,
+    Widget button = SizedBox(
+      width: widget.width,
+      height: widget.height,
       child: TextButton(
-        onPressed: enabled && !loading ? onTap : null,
+        onPressed: widget.enabled && !widget.loading ? widget.onTap : null,
         style: TextButton.styleFrom(
           foregroundColor: fgColor,
           disabledForegroundColor: fgColor.withValues(alpha: 0.4),
-          padding: padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          textStyle: textStyle ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          textStyle: widget.textStyle ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
-        child: loading
-            ? SizedBox(
-                width: 20, height: 20,
-                child: CircularProgressIndicator(strokeWidth: 2, color: fgColor),
-              )
-            : Text(text),
+        child: AnimatedSwitcher(
+          duration: widget.animationDuration,
+          switchInCurve: Curves.easeOut,
+          switchOutCurve: Curves.easeIn,
+          child: widget.loading
+              ? SizedBox(
+                  key: const ValueKey('loading'),
+                  width: 20, height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2, color: fgColor),
+                )
+              : SizedBox(
+                  key: const ValueKey('content'),
+                  child: Text(widget.text),
+                ),
+        ),
+      ),
+    );
+
+    if (isCupertino) {
+      button = cupertino.CupertinoButton(
+        onPressed: widget.enabled && !widget.loading ? widget.onTap : null,
+        padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        color: Colors.transparent,
+        disabledColor: Colors.transparent,
+        child: AnimatedSwitcher(
+          duration: widget.animationDuration,
+          switchInCurve: Curves.easeOut,
+          switchOutCurve: Curves.easeIn,
+          child: widget.loading
+              ? SizedBox(
+                  key: const ValueKey('loading'),
+                  width: 20, height: 20,
+                  child: cupertino.CupertinoActivityIndicator(radius: 10, color: fgColor),
+                )
+              : Text(widget.text, key: const ValueKey('content'), style: widget.textStyle ?? TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: fgColor)),
+        ),
+      );
+    }
+
+    return Listener(
+      onPointerDown: (_) => setState(() => _pressed = true),
+      onPointerUp: (_) => setState(() => _pressed = false),
+      onPointerCancel: (_) => setState(() => _pressed = false),
+      child: AnimatedScale(
+        scale: _pressed ? 0.97 : 1.0,
+        duration: widget.animationDuration,
+        curve: Curves.easeOut,
+        child: button,
       ),
     );
   }

@@ -40,9 +40,13 @@ class ExpansionTileV1 extends HookWidget {
     final theme = Theme.of(context);
     final expanded = useState(initiallyExpanded);
 
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
       decoration: BoxDecoration(
-        color: backgroundColor ?? Colors.transparent,
+        color: expanded.value
+            ? (backgroundColor ?? theme.colorScheme.surface.withValues(alpha: 0.05))
+            : (collapsedBackgroundColor ?? Colors.transparent),
         borderRadius: BorderRadius.circular(radius ?? 8),
         border: Border.all(color: borderColor ?? theme.dividerColor),
       ),
@@ -60,8 +64,8 @@ class ExpansionTileV1 extends HookWidget {
             expanded.value = v;
             onExpansionChanged?.call(v);
           },
-          collapsedBackgroundColor: collapsedBackgroundColor ?? Colors.transparent,
-          backgroundColor: backgroundColor ?? Colors.transparent,
+          collapsedBackgroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
           collapsedIconColor: collapsedIconColor ?? theme.colorScheme.onSurface,
           iconColor: iconColor ?? theme.colorScheme.onSurface,
           shape: const Border(),

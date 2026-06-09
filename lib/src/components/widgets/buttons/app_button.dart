@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../foundation/platform.dart';
 import 'app_button_type.dart';
 
-class AppButton extends StatelessWidget {
+class AppButton extends StatefulWidget {
   const AppButton({
     super.key,
     required this.text,
@@ -22,6 +22,7 @@ class AppButton extends StatelessWidget {
     this.loading = false,
     this.enabled = true,
     this.child,
+    this.animationDuration = const Duration(milliseconds: 150),
   });
 
   factory AppButton.icon({
@@ -82,68 +83,106 @@ class AppButton extends StatelessWidget {
   final bool loading;
   final bool enabled;
   final Widget? child;
+  final Duration animationDuration;
+
+  @override
+  State<AppButton> createState() => _AppButtonState();
+}
+
+class _AppButtonState extends State<AppButton> {
+  bool _pressed = false;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
-    final bgColor = switch (type) {
-      AppButtonType.primary => primaryColor ?? cs.primary,
-      AppButtonType.secondary => secondaryColor ?? cs.secondary,
-      AppButtonType.error => errorColor ?? cs.error,
+    final bgColor = switch (widget.type) {
+      AppButtonType.primary => widget.primaryColor ?? cs.primary,
+      AppButtonType.secondary => widget.secondaryColor ?? cs.secondary,
+      AppButtonType.error => widget.errorColor ?? cs.error,
     };
 
-    final fgColor = textColor ?? switch (type) {
+    final fgColor = widget.textColor ?? switch (widget.type) {
       AppButtonType.primary => cs.onPrimary,
       AppButtonType.secondary => cs.onSecondary,
       AppButtonType.error => cs.onError,
     };
 
-    if (isCupertino) {
-      return SizedBox(
-        width: width,
-        height: height ?? 44,
-        child: cupertino.CupertinoButton(
-          onPressed: enabled && !loading ? onTap : null,
-          padding: padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-          color: bgColor,
-          disabledColor: bgColor.withValues(alpha: 0.4),
-          borderRadius: BorderRadius.circular(radius ?? 12),
-          child: loading
-              ? SizedBox(
-                  width: 20, height: 20,
-                  child: cupertino.CupertinoActivityIndicator(radius: 10, color: fgColor),
-                )
-              : DefaultTextStyle(
-                  style: textStyle ?? const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
-                  child: child ?? Text(text, style: TextStyle(color: fgColor)),
-                ),
-        ),
-      );
-    }
+    final scaleTween = _pressed ? 0.97 : 1.0;
 
-    return SizedBox(
-      width: width,
-      height: height,
+    Widget button = SizedBox(
+      width: widget.width,
+      height: widget.height,
       child: ElevatedButton(
-        onPressed: enabled && !loading ? onTap : null,
+        onPressed: widget.enabled && !widget.loading ? widget.onTap : null,
         style: ElevatedButton.styleFrom(
           backgroundColor: bgColor,
           foregroundColor: fgColor,
           disabledBackgroundColor: bgColor.withValues(alpha: 0.4),
           disabledForegroundColor: fgColor.withValues(alpha: 0.6),
           elevation: 0,
-          padding: padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          textStyle: textStyle ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(radius ?? 12)),
+          padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          textStyle: widget.textStyle ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(widget.radius ?? 12)),
         ),
-        child: loading
-            ? SizedBox(
-                width: 20, height: 20,
-                child: CircularProgressIndicator(strokeWidth: 2, color: fgColor),
-              )
-            : child ?? Text(text),
+        child: AnimatedSwitcher(
+          duration: widget.animationDuration,
+          switchInCurve: Curves.easeOut,
+          switchOutCurve: Curves.easeIn,
+          child: widget.loading
+              ? SizedBox(
+                  key: const ValueKey('loading'),
+                  width: 20, height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2, color: fgColor),
+                )
+              : SizedBox(
+                  key: const ValueKey('content'),
+                  child: widget.child ?? Text(widget.text),
+                ),
+        ),
+      ),
+    );
+
+    if (isCupertino) {
+      button = SizedBox(
+        width: widget.width,
+        height: widget.height ?? 44,
+        child: cupertino.CupertinoButton(
+          onPressed: widget.enabled && !widget.loading ? widget.onTap : null,
+          padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          color: bgColor,
+          disabledColor: bgColor.withValues(alpha: 0.4),
+          borderRadius: BorderRadius.circular(widget.radius ?? 12),
+          child: AnimatedSwitcher(
+            duration: widget.animationDuration,
+            switchInCurve: Curves.easeOut,
+            switchOutCurve: Curves.easeIn,
+            child: widget.loading
+                ? SizedBox(
+                    key: const ValueKey('loading'),
+                    width: 20, height: 20,
+                    child: cupertino.CupertinoActivityIndicator(radius: 10, color: fgColor),
+                  )
+                : DefaultTextStyle(
+                    key: const ValueKey('content'),
+                    style: widget.textStyle ?? const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
+                    child: widget.child ?? Text(widget.text, style: TextStyle(color: fgColor)),
+                  ),
+          ),
+        ),
+      );
+    }
+
+    return Listener(
+      onPointerDown: (_) => setState(() => _pressed = true),
+      onPointerUp: (_) => setState(() => _pressed = false),
+      onPointerCancel: (_) => setState(() => _pressed = false),
+      child: AnimatedScale(
+        scale: scaleTween,
+        duration: widget.animationDuration,
+        curve: Curves.easeOut,
+        child: button,
       ),
     );
   }

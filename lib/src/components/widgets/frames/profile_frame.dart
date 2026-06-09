@@ -11,6 +11,7 @@ class ProfileFrame extends StatelessWidget {
     this.backgroundColor,
     this.borderColor,
     this.borderWidth,
+    this.animationDuration = const Duration(milliseconds: 200),
   });
 
   final Widget? child;
@@ -21,6 +22,7 @@ class ProfileFrame extends StatelessWidget {
   final Color? backgroundColor;
   final Color? borderColor;
   final double? borderWidth;
+  final Duration animationDuration;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,9 @@ class ProfileFrame extends StatelessWidget {
     final effectiveSize = size ?? 48;
     final effectiveRadius = radius ?? effectiveSize / 2;
 
-    return Container(
+    return AnimatedContainer(
+      duration: animationDuration,
+      curve: Curves.easeOut,
       width: effectiveSize,
       height: effectiveSize,
       decoration: BoxDecoration(

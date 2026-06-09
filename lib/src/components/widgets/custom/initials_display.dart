@@ -10,6 +10,7 @@ class InitialsDisplay extends StatelessWidget {
     this.radius,
     this.maxLetters = 2,
     this.useAcronyms = false,
+    this.animationDuration = const Duration(milliseconds: 200),
   });
 
   final String name;
@@ -19,6 +20,7 @@ class InitialsDisplay extends StatelessWidget {
   final double? radius;
   final int maxLetters;
   final bool useAcronyms;
+  final Duration animationDuration;
 
   String get _initials {
     final parts = name.trim().split(RegExp(r'\s+'));
@@ -41,7 +43,9 @@ class InitialsDisplay extends StatelessWidget {
     final theme = Theme.of(context);
     final effectiveRadius = radius ?? size / 2;
 
-    return Container(
+    return AnimatedContainer(
+      duration: animationDuration,
+      curve: Curves.easeOut,
       width: size,
       height: size,
       decoration: BoxDecoration(
