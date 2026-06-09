@@ -1,4 +1,4 @@
-# flutter_ui_kit
+# app_ui_kit
 
 A comprehensive Flutter UI kit with theming, component library, design presets, headless state management, and Google Fonts integration.
 
