@@ -501,7 +501,7 @@ class AppTheme {
           borderRadius: BorderRadius.horizontal(right: Radius.circular(0)),
         ),
       ),
-      bottomAppBarTheme: BottomAppBarTheme(
+      bottomAppBarTheme: BottomAppBarThemeData(
         color: appColors.surface,
         elevation: 0,
       ),

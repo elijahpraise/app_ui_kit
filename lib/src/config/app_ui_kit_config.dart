@@ -133,7 +133,7 @@ class AppUiKitConfig {
       case AppUiKitPreset.airbnb:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.comfortable,
-          cardTheme: CardTheme(
+          cardTheme: CardThemeData(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(14),
             ),
@@ -142,7 +142,7 @@ class AppUiKitConfig {
       case AppUiKitPreset.apple:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.comfortable,
-          cardTheme: CardTheme(
+          cardTheme: CardThemeData(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -166,7 +166,7 @@ class AppUiKitConfig {
       case AppUiKitPreset.spotify:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.compact,
-          cardTheme: CardTheme(
+          cardTheme: CardThemeData(
             color: brightness == Brightness.dark
                 ? const Color(0xFF181818)
                 : null,
@@ -180,7 +180,7 @@ class AppUiKitConfig {
           scaffoldBackgroundColor: brightness == Brightness.light
               ? const Color(0xFFF2F0EB)
               : baseTheme.scaffoldBackgroundColor,
-          cardTheme: CardTheme(
+          cardTheme: CardThemeData(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
@@ -218,7 +218,7 @@ class AppUiKitConfig {
           scaffoldBackgroundColor: brightness == Brightness.dark
               ? const Color(0xFF07080A)
               : const Color(0xFFF4F4F6),
-          cardTheme: CardTheme(
+          cardTheme: CardThemeData(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
