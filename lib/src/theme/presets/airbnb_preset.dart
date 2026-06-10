@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../color_values.dart';
 
+/// Design preset that captures Airbnb's brand identity through color,
+/// typography, and spacing tokens. Mirrors the visual language used across
+/// Airbnb's marketplace platform.
 class AirbnbPreset {
   AirbnbPreset._();
 
+  /// Light theme colors following Airbnb's brand palette.
+  ///
+  /// Features the signature `Razzmatazz` red (`0xFFFF385C`) as the primary
+  /// color, paired with neutral surfaces and subtle borders for a clean,
+  /// trust-oriented aesthetic.
   static AppColors get light => AppColors(
         primary: const Color(0xFFFF385C),
         secondary: const Color(0xFF222222),
@@ -36,6 +44,11 @@ class AirbnbPreset {
         dialogSurface: Colors.white,
       );
 
+  /// Dark theme colors aligned with Airbnb's brand identity.
+  ///
+  /// Maintains the signature red primary while shifting to darker surfaces
+  /// (`0xFF222222`) and lighter text (`0xFFF7F7F7`) for comfortable
+  /// low-light reading.
   static AppColors get dark => AppColors(
         primary: const Color(0xFFFF385C),
         secondary: const Color(0xFFDDDDDD),
@@ -67,9 +80,16 @@ class AirbnbPreset {
         dialogSurface: const Color(0xFF333333),
       );
 
+  /// Custom typeface used across Airbnb's UI — a rounded, friendly
+  /// geometric sans-serif.
   static String get fontFamily => 'Airbnb Cereal';
 
+  /// Border radius for small UI elements (e.g. chips, badges).
   static int get radiusSmall => 8;
+
+  /// Border radius for medium-sized surfaces (e.g. cards, dialogs).
   static int get radiusMedium => 12;
+
+  /// Border radius for large containers (e.g. bottom sheets, modals).
   static int get radiusLarge => 24;
 }

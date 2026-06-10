@@ -4,17 +4,15 @@ import 'app_ui_kit_preset.dart';
 import 'app_ui_kit_theme_bundle.dart';
 
 /// Signature for building custom [ThemeData] from a [Brightness] and [AppUiKitConfig].
-typedef AppUiKitThemeBuilder = ThemeData Function(
-  Brightness brightness,
-  AppUiKitConfig config,
-);
+typedef AppUiKitThemeBuilder =
+    ThemeData Function(Brightness brightness, AppUiKitConfig config);
 
 /// Config contract supplied by host applications when initializing the package.
 class AppUiKitConfig {
   /// Creates a [AppUiKitConfig] with default values and optional overrides.
   const AppUiKitConfig({
     this.fontFamily,
-    this.preset = AppUiKitPreset.baseline,
+    this.preset = AppUiKitPreset.vibrant,
     this.themeMode = ThemeMode.system,
     this.lightTheme,
     this.darkTheme,
@@ -101,7 +99,8 @@ class AppUiKitConfig {
   }
 
   ThemeData _resolveTheme(Brightness brightness) {
-    final explicitTheme = brightness == Brightness.light ? lightTheme : darkTheme;
+    final explicitTheme =
+        brightness == Brightness.light ? lightTheme : darkTheme;
     if (explicitTheme != null) {
       return explicitTheme;
     }
@@ -127,9 +126,7 @@ class AppUiKitConfig {
       case AppUiKitPreset.baseline:
         return baseTheme;
       case AppUiKitPreset.vercel:
-        return baseTheme.copyWith(
-          visualDensity: VisualDensity.compact,
-        );
+        return baseTheme.copyWith(visualDensity: VisualDensity.compact);
       case AppUiKitPreset.airbnb:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.comfortable,
@@ -149,27 +146,22 @@ class AppUiKitConfig {
           ),
         );
       case AppUiKitPreset.vibrant:
-        return baseTheme.copyWith(
-          visualDensity: VisualDensity.comfortable,
-        );
+        return baseTheme.copyWith(visualDensity: VisualDensity.comfortable);
       case AppUiKitPreset.highContrast:
         return baseTheme.copyWith(
           colorScheme: colorScheme.copyWith(
-            onPrimary: brightness == Brightness.dark
-                ? Colors.black
-                : Colors.white,
-            onSecondary: brightness == Brightness.dark
-                ? Colors.black
-                : Colors.white,
+            onPrimary:
+                brightness == Brightness.dark ? Colors.black : Colors.white,
+            onSecondary:
+                brightness == Brightness.dark ? Colors.black : Colors.white,
           ),
         );
       case AppUiKitPreset.spotify:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.compact,
           cardTheme: CardThemeData(
-            color: brightness == Brightness.dark
-                ? const Color(0xFF181818)
-                : null,
+            color:
+                brightness == Brightness.dark ? const Color(0xFF181818) : null,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             ),
@@ -177,9 +169,10 @@ class AppUiKitConfig {
         );
       case AppUiKitPreset.starbucks:
         return baseTheme.copyWith(
-          scaffoldBackgroundColor: brightness == Brightness.light
-              ? const Color(0xFFF2F0EB)
-              : baseTheme.scaffoldBackgroundColor,
+          scaffoldBackgroundColor:
+              brightness == Brightness.light
+                  ? const Color(0xFFF2F0EB)
+                  : baseTheme.scaffoldBackgroundColor,
           cardTheme: CardThemeData(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -189,35 +182,41 @@ class AppUiKitConfig {
       case AppUiKitPreset.linear:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.compact,
-          scaffoldBackgroundColor: brightness == Brightness.dark
-              ? const Color(0xFF010102)
-              : baseTheme.scaffoldBackgroundColor,
-          dividerColor: brightness == Brightness.dark
-              ? const Color(0xFF23252A)
-              : baseTheme.dividerColor,
+          scaffoldBackgroundColor:
+              brightness == Brightness.dark
+                  ? const Color(0xFF010102)
+                  : baseTheme.scaffoldBackgroundColor,
+          dividerColor:
+              brightness == Brightness.dark
+                  ? const Color(0xFF23252A)
+                  : baseTheme.dividerColor,
         );
       case AppUiKitPreset.notion:
         return baseTheme.copyWith(
-          scaffoldBackgroundColor: brightness == Brightness.light
-              ? const Color(0xFFF6F5F4)
-              : const Color(0xFF213183),
-          dividerColor: brightness == Brightness.light
-              ? const Color(0xFFE6E6E6)
-              : baseTheme.dividerColor,
+          scaffoldBackgroundColor:
+              brightness == Brightness.light
+                  ? const Color(0xFFF6F5F4)
+                  : const Color(0xFF213183),
+          dividerColor:
+              brightness == Brightness.light
+                  ? const Color(0xFFE6E6E6)
+                  : baseTheme.dividerColor,
         );
       case AppUiKitPreset.mongodb:
         return baseTheme.copyWith(
-          scaffoldBackgroundColor: brightness == Brightness.dark
-              ? const Color(0xFF001E2B)
-              : baseTheme.scaffoldBackgroundColor,
+          scaffoldBackgroundColor:
+              brightness == Brightness.dark
+                  ? const Color(0xFF001E2B)
+                  : baseTheme.scaffoldBackgroundColor,
           visualDensity: VisualDensity.standard,
         );
       case AppUiKitPreset.raycast:
         return baseTheme.copyWith(
           visualDensity: VisualDensity.compact,
-          scaffoldBackgroundColor: brightness == Brightness.dark
-              ? const Color(0xFF07080A)
-              : const Color(0xFFF4F4F6),
+          scaffoldBackgroundColor:
+              brightness == Brightness.dark
+                  ? const Color(0xFF07080A)
+                  : const Color(0xFFF4F4F6),
           cardTheme: CardThemeData(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

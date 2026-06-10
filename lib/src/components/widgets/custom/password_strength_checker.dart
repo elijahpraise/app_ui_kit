@@ -32,8 +32,25 @@ extension PasswordStrengthLabel on PasswordStrength {
   }
 }
 
+/// A single password requirement with a label and a validation function.
+class PasswordRequirement {
+  const PasswordRequirement({
+    required this.label,
+    required this.isMet,
+  });
+
+  /// Human-readable description (e.g. "At least 8 characters").
+  final String label;
+
+  /// Whether the given [password] satisfies this requirement.
+  final bool Function(String password) isMet;
+}
+
 /// A password strength indicator that evaluates a password against
 /// length, case, digit, and special character rules.
+///
+/// Supports custom [requirements] and an optional display of which
+/// requirements are met via [showRequirements].
 class PasswordStrengthChecker extends StatelessWidget {
   const PasswordStrengthChecker({
     super.key,
@@ -41,6 +58,8 @@ class PasswordStrengthChecker extends StatelessWidget {
     this.showLabel = true,
     this.height = 4,
     this.radius,
+    this.requirements,
+    this.showRequirements = false,
   });
 
   /// The password string to evaluate.
@@ -51,21 +70,60 @@ class PasswordStrengthChecker extends StatelessWidget {
   final double height;
   /// Border radius of the progress bar. Defaults to 2.
   final double? radius;
+  /// Custom password requirements. When null, built-in defaults are used.
+  final List<PasswordRequirement>? requirements;
+  /// Whether to display the requirement checklist below the bar.
+  final bool showRequirements;
+
+  /// The built-in default password requirements.
+  static List<PasswordRequirement> get defaultRequirements => const [
+    PasswordRequirement(
+      label: 'At least 8 characters',
+      isMet: _min8,
+    ),
+    PasswordRequirement(
+      label: 'At least 12 characters',
+      isMet: _min12,
+    ),
+    PasswordRequirement(
+      label: 'Uppercase letter',
+      isMet: _hasUpper,
+    ),
+    PasswordRequirement(
+      label: 'Lowercase letter',
+      isMet: _hasLower,
+    ),
+    PasswordRequirement(
+      label: 'Digit',
+      isMet: _hasDigit,
+    ),
+    PasswordRequirement(
+      label: 'Special character',
+      isMet: _hasSpecial,
+    ),
+  ];
+
+  static bool _min8(String p) => p.length >= 8;
+  static bool _min12(String p) => p.length >= 12;
+  static bool _hasUpper(String p) => RegExp(r'[A-Z]').hasMatch(p);
+  static bool _hasLower(String p) => RegExp(r'[a-z]').hasMatch(p);
+  static bool _hasDigit(String p) => RegExp(r'[0-9]').hasMatch(p);
+  static bool _hasSpecial(String p) =>
+      RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(p);
+
+  List<PasswordRequirement> get _effectiveRequirements =>
+      requirements ?? defaultRequirements;
 
   PasswordStrength get _strength {
-    if (password.isEmpty) return PasswordStrength.weak;
+    final reqs = _effectiveRequirements;
+    if (password.isEmpty || reqs.isEmpty) return PasswordStrength.weak;
 
-    int score = 0;
-    if (password.length >= 8) score++;
-    if (password.length >= 12) score++;
-    if (RegExp(r'[A-Z]').hasMatch(password)) score++;
-    if (RegExp(r'[a-z]').hasMatch(password)) score++;
-    if (RegExp(r'[0-9]').hasMatch(password)) score++;
-    if (RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(password)) score++;
+    final met = reqs.where((r) => r.isMet(password)).length;
+    final ratio = met / reqs.length;
 
-    if (score <= 2) return PasswordStrength.weak;
-    if (score <= 3) return PasswordStrength.fair;
-    if (score <= 5) return PasswordStrength.good;
+    if (ratio <= 0.33) return PasswordStrength.weak;
+    if (ratio <= 0.5) return PasswordStrength.fair;
+    if (ratio <= 0.83) return PasswordStrength.good;
     return PasswordStrength.strong;
   }
 
@@ -74,6 +132,7 @@ class PasswordStrengthChecker extends StatelessWidget {
     final theme = Theme.of(context);
     final strength = _strength;
     final color = strength.resolveColor(theme);
+    final reqs = _effectiveRequirements;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,6 +153,36 @@ class PasswordStrengthChecker extends StatelessWidget {
             strength.label,
             style: theme.textTheme.bodySmall?.copyWith(color: color),
           ),
+        ],
+        if (showRequirements && reqs.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          ...reqs.map((req) {
+            final met = req.isMet(password);
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 1),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    met ? Icons.check_circle : Icons.radio_button_unchecked,
+                    size: 14,
+                    color: met
+                        ? const Color(0xFF10B981)
+                        : theme.colorScheme.onSurface.withValues(alpha: 0.4),
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    req.label,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: met
+                          ? const Color(0xFF10B981)
+                          : theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
         ],
       ],
     );

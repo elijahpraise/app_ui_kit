@@ -1,6 +1,6 @@
+import 'package:app_ui_kit/app_ui_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:app_ui_kit/app_ui_kit.dart';
 
 Widget boilerplate(Widget child) {
   return MaterialApp(
@@ -37,7 +37,7 @@ void main() {
   group('ScaffoldV1', () {
     testWidgets('renders body when not loading', (tester) async {
       await tester.pumpWidget(
-        boilerplate(const ScaffoldV1(body: Text('Content'), isLoading: false)),
+        boilerplate(const AppScaffold(body: Text('Content'), isLoading: false)),
       );
 
       expect(find.text('Content'), findsOneWidget);
@@ -45,7 +45,7 @@ void main() {
 
     testWidgets('shows overlay when loading', (tester) async {
       await tester.pumpWidget(
-        boilerplate(const ScaffoldV1(body: Text('Content'), isLoading: true)),
+        boilerplate(const AppScaffold(body: Text('Content'), isLoading: true)),
       );
 
       expect(find.byType(LoadingOverlayV1), findsOneWidget);

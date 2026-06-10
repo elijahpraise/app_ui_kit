@@ -14,62 +14,77 @@ class AppTextButton extends StatefulWidget {
   /// and [enabled] to control interactivity.
   const AppTextButton({
     super.key,
+
     /// The label text displayed on the button.
     required this.text,
+
     /// The visual style variant. Defaults to [AppButtonType.primary].
     this.type = AppButtonType.primary,
+
     /// Called when the button is pressed.
     this.onTap,
-    /// The height of the button.
-    this.height,
-    /// The width of the button.
-    this.width,
+
     /// Overrides the primary foreground color.
     this.primaryColor,
+
     /// Overrides the secondary foreground color.
     this.secondaryColor,
+
     /// Overrides the error foreground color.
     this.errorColor,
+
     /// Overrides the text foreground color.
     this.textColor,
+
     /// The text style applied to the button label.
     this.textStyle,
+
     /// The padding around the button content.
     this.padding,
+
     /// Whether to show a loading spinner. Defaults to false.
     this.loading = false,
+
     /// Whether the button is interactive. Defaults to true.
     this.enabled = true,
+
     /// The duration of the press-scale animation. Defaults to 150ms.
     this.animationDuration = const Duration(milliseconds: 150),
   });
 
   /// The label text displayed on the button.
   final String text;
+
   /// The visual style variant.
   final AppButtonType type;
+
   /// Called when the button is pressed.
   final VoidCallback? onTap;
-  /// The height of the button.
-  final double? height;
-  /// The width of the button.
-  final double? width;
+
   /// Overrides the primary foreground color.
   final Color? primaryColor;
+
   /// Overrides the secondary foreground color.
   final Color? secondaryColor;
+
   /// Overrides the error foreground color.
   final Color? errorColor;
+
   /// Overrides the text foreground color.
   final Color? textColor;
+
   /// The text style applied to the button label.
   final TextStyle? textStyle;
+
   /// The padding around the button content.
   final EdgeInsetsGeometry? padding;
+
   /// Whether to show a loading spinner in place of the label.
   final bool loading;
+
   /// Whether the button is interactive.
   final bool enabled;
+
   /// The duration of the press-scale animation.
   final Duration animationDuration;
 
@@ -85,58 +100,83 @@ class _AppTextButtonState extends State<AppTextButton> {
     final theme = Theme.of(context);
     final cs = theme.colorScheme;
 
-    final fgColor = widget.textColor ?? switch (widget.type) {
-      AppButtonType.primary => widget.primaryColor ?? cs.primary,
-      AppButtonType.secondary => widget.secondaryColor ?? cs.secondary,
-      AppButtonType.error => widget.errorColor ?? cs.error,
-    };
+    final fgColor =
+        widget.textColor ??
+        switch (widget.type) {
+          AppButtonType.primary => widget.primaryColor ?? cs.primary,
+          AppButtonType.secondary => widget.secondaryColor ?? cs.secondary,
+          AppButtonType.error => widget.errorColor ?? cs.error,
+        };
 
-    Widget button = SizedBox(
-      width: widget.width,
-      height: widget.height,
-      child: TextButton(
-        onPressed: widget.enabled && !widget.loading ? widget.onTap : null,
-        style: TextButton.styleFrom(
-          foregroundColor: fgColor,
-          disabledForegroundColor: fgColor.withValues(alpha: 0.4),
-          padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          textStyle: widget.textStyle ?? const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-        ),
-        child: AnimatedSwitcher(
-          duration: widget.animationDuration,
-          switchInCurve: Curves.easeOut,
-          switchOutCurve: Curves.easeIn,
-          child: widget.loading
-              ? SizedBox(
+    Widget button = TextButton(
+      onPressed: widget.enabled && !widget.loading ? widget.onTap : null,
+      style: TextButton.styleFrom(
+        foregroundColor: fgColor,
+        minimumSize: Size.fromHeight(52),
+        disabledForegroundColor: fgColor.withValues(alpha: 0.4),
+        padding:
+            widget.padding ??
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+        textStyle:
+            widget.textStyle ??
+            const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+      ),
+      child: AnimatedSwitcher(
+        duration: widget.animationDuration,
+        switchInCurve: Curves.easeOut,
+        switchOutCurve: Curves.easeIn,
+        child:
+            widget.loading
+                ? SizedBox(
                   key: const ValueKey('loading'),
-                  width: 20, height: 20,
-                  child: CircularProgressIndicator(strokeWidth: 2, color: fgColor),
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    color: fgColor,
+                  ),
                 )
-              : SizedBox(
+                : SizedBox(
                   key: const ValueKey('content'),
                   child: Text(widget.text),
                 ),
-        ),
       ),
     );
 
     if (isCupertino) {
       button = cupertino.CupertinoButton(
         onPressed: widget.enabled && !widget.loading ? widget.onTap : null,
-        padding: widget.padding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding:
+            widget.padding ??
+            const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
         color: Colors.transparent,
         disabledColor: Colors.transparent,
         child: AnimatedSwitcher(
           duration: widget.animationDuration,
           switchInCurve: Curves.easeOut,
           switchOutCurve: Curves.easeIn,
-          child: widget.loading
-              ? SizedBox(
-                  key: const ValueKey('loading'),
-                  width: 20, height: 20,
-                  child: cupertino.CupertinoActivityIndicator(radius: 10, color: fgColor),
-                )
-              : Text(widget.text, key: const ValueKey('content'), style: widget.textStyle ?? TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: fgColor)),
+          child:
+              widget.loading
+                  ? SizedBox(
+                    key: const ValueKey('loading'),
+                    width: 20,
+                    height: 20,
+                    child: cupertino.CupertinoActivityIndicator(
+                      radius: 10,
+                      color: fgColor,
+                    ),
+                  )
+                  : Text(
+                    widget.text,
+                    key: const ValueKey('content'),
+                    style:
+                        widget.textStyle ??
+                        TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: fgColor,
+                        ),
+                  ),
         ),
       );
     }

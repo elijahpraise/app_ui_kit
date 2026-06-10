@@ -295,5 +295,93 @@ void main() {
 
       expect(find.byType(LinearProgressIndicator), findsOneWidget);
     });
+
+    testWidgets('renders strength label by default', (tester) async {
+      await tester.pumpWidget(
+        boilerplate(const PasswordStrengthChecker(password: 'abc')),
+      );
+
+      expect(find.text('Weak'), findsOneWidget);
+    });
+
+    testWidgets('hides label when showLabel is false', (tester) async {
+      await tester.pumpWidget(
+        boilerplate(
+          const PasswordStrengthChecker(password: 'abc', showLabel: false),
+        ),
+      );
+
+      expect(find.text('Weak'), findsNothing);
+    });
+
+    testWidgets('shows requirements when showRequirements is true', (tester) async {
+      await tester.pumpWidget(
+        boilerplate(
+          const PasswordStrengthChecker(
+            password: 'Abcd!2345xyz',
+            showRequirements: true,
+          ),
+        ),
+      );
+
+      expect(find.text('At least 8 characters'), findsOneWidget);
+      expect(find.text('Uppercase letter'), findsOneWidget);
+    });
+
+    testWidgets('hides requirements when showRequirements is false', (tester) async {
+      await tester.pumpWidget(
+        boilerplate(
+          const PasswordStrengthChecker(password: 'abc'),
+        ),
+      );
+
+      expect(find.text('At least 8 characters'), findsNothing);
+    });
+
+    testWidgets('uses custom requirements and displays pass/fail', (tester) async {
+      await tester.pumpWidget(
+        boilerplate(
+          PasswordStrengthChecker(
+            password: 'abc123',
+            showRequirements: true,
+            requirements: const [
+              PasswordRequirement(
+                label: 'Min 5 chars',
+                isMet: _min5,
+              ),
+              PasswordRequirement(
+                label: 'Has number',
+                isMet: _hasNum,
+              ),
+            ],
+          ),
+        ),
+      );
+
+      expect(find.text('Min 5 chars'), findsOneWidget);
+      expect(find.text('Has number'), findsOneWidget);
+    });
+
+    testWidgets('custom requirements affect strength calculation', (tester) async {
+      await tester.pumpWidget(
+        boilerplate(
+          PasswordStrengthChecker(
+            password: 'abcdef',
+            showLabel: true,
+            requirements: const [
+              PasswordRequirement(label: 'Min 3 chars', isMet: _min3),
+              PasswordRequirement(label: 'Min 6 chars', isMet: _min6),
+            ],
+          ),
+        ),
+      );
+
+      expect(find.text('Strong'), findsOneWidget);
+    });
   });
 }
+
+bool _min5(String p) => p.length >= 5;
+bool _hasNum(String p) => RegExp(r'[0-9]').hasMatch(p);
+bool _min3(String p) => p.length >= 3;
+bool _min6(String p) => p.length >= 6;

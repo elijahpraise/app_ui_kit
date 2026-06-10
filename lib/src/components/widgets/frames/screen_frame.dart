@@ -6,7 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ScreenFrame extends StatelessWidget {
   const ScreenFrame({
     super.key,
-    required this.child,
+    this.child,
+    this.children,
     this.padding,
     this.scrollController,
     this.scrollDirection = Axis.vertical,
@@ -17,7 +18,8 @@ class ScreenFrame extends StatelessWidget {
   /// the available screen height.
   const ScreenFrame.fixed({
     super.key,
-    required this.child,
+    this.child,
+    this.children,
     this.padding,
     this.scrollController,
     this.scrollDirection = Axis.vertical,
@@ -28,7 +30,8 @@ class ScreenFrame extends StatelessWidget {
   /// its natural height.
   const ScreenFrame.unbounded({
     super.key,
-    required this.child,
+    this.child,
+    this.children,
     this.padding,
     this.scrollController,
     this.scrollDirection = Axis.vertical,
@@ -36,7 +39,10 @@ class ScreenFrame extends StatelessWidget {
   }) : _mode = ScreenFrameMode.unbounded;
 
   /// The widget to display inside the scrollable frame.
-  final Widget child;
+  final Widget? child;
+
+  /// The list of widgets to display inside the scrollable frame.
+  final List<Widget>? children;
 
   /// Padding around the child. Defaults to horizontal 16.w and vertical 8.h.
   final EdgeInsetsGeometry? padding;
@@ -70,12 +76,14 @@ class ScreenFrame extends StatelessWidget {
         if (useSlivers == true) {
           return CustomScrollView(
             controller: scrollController,
-            slivers: [
-              SliverPadding(
-                padding: effectivePadding,
-                sliver: SliverToBoxAdapter(child: child),
-              ),
-            ],
+            slivers:
+                children ??
+                [
+                  SliverPadding(
+                    padding: effectivePadding,
+                    sliver: SliverToBoxAdapter(child: child),
+                  ),
+                ],
           );
         }
         return SingleChildScrollView(

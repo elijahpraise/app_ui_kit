@@ -33,22 +33,54 @@ Full test coverage across all components, presets, themes, helpers, and controll
 
 ## Getting started
 
-Add `flutter_ui_kit` to your `pubspec.yaml`:
+Add `app_ui_kit` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_ui_kit:
-    path: path/to/flutter_ui_kit
+  app_ui_kit:
+    path: path/to/app_ui_kit
 ```
 
-Requires Dart SDK `^3.7.0` and Flutter `>=1.17.0`.
+Requires Dart SDK `^3.9.2` and Flutter `>=3.35.4`.
 
 ## Usage
+
+### Using the config system (recommended)
+
+```dart
+import 'package:app_ui_kit/app_ui_kit.dart';
+
+void main() {
+  AppUiKit.initialize(
+    config: AppUiKitConfig(
+      preset: AppUiKitPreset.spotify,
+      fontFamily: 'Inter',
+    ),
+  );
+
+  runApp(const App());
+}
+
+class App extends StatelessWidget {
+  const App({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final themes = AppUiKit.themes;
+    return MaterialApp(
+      theme: themes.lightTheme,
+      darkTheme: themes.darkTheme,
+      themeMode: themes.themeMode,
+      home: const HomeScreen(),
+    );
+  }
+}
+```
 
 ### Quick start with a design preset
 
 ```dart
-import 'package:flutter_ui_kit/flutter_ui_kit.dart';
+import 'package:app_ui_kit/app_ui_kit.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -61,26 +93,6 @@ class App extends StatelessWidget {
     );
   }
 }
-```
-
-### Using the FlutterUIKit widget
-
-```dart
-FlutterUIKit(
-  preset: DesignPreset.defaultPreset,
-  child: MaterialApp.router(...),
-)
-```
-
-### Using the config system
-
-```dart
-FlutterUiKit.initialize(
-  config: FlutterUiKitConfig(
-    preset: FlutterUiKitPreset.spotify,
-    fontFamily: 'Inter',
-  ),
-);
 ```
 
 ### Using components
