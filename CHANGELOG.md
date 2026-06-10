@@ -1,3 +1,13 @@
+## 0.0.2
+
+* Removed `FlutterUIKit` widget — use `AppUiKit.initialize()` instead
+* `PasswordStrengthChecker` accepts custom `requirements` and optional `showRequirements` checklist
+* Added `PasswordRequirement` class for defining custom password validation rules
+* Increased button default sizes (padding, font size) for better visibility
+* Cupertino buttons no longer have a fixed default height
+* Removed `lints` dev dependency (conflict with `flutter_lints`)
+* Updated README to reflect current API
+
 ## 0.0.1
 
 * Initial release
