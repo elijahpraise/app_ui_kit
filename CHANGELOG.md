@@ -1,3 +1,9 @@
+## 0.0.1+3
+
+* Added library-level doc comment to `app_ui_kit.dart`
+* Added private constructors to `FlutterDialogHelper` and `FlutterModalBottomSheet` to suppress implicit public constructors
+* Documentation coverage now at 100% (verified via `public_member_api_docs` lint)
+
 ## 0.0.1+2
 
 * Removed `flutter_hooks` dependency — `PasswordField` and `ExpansionTileV1` migrated from `HookWidget` to `StatefulWidget`/`StatelessWidget` with plain `setState`
