@@ -1,3 +1,8 @@
+## 0.0.1+4
+
+* Added example app in `example/` directory demonstrating all components, helpers, headless pattern, and design presets
+* Updated README with example app reference
+
 ## 0.0.1+3
 
 * Added library-level doc comment to `app_ui_kit.dart`

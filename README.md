@@ -129,7 +129,7 @@ BaseTextField(
 | Inputs | `BaseTextField`, `InputField`, `PasswordField`, `PhoneField`, `SearchInputField`, `SearchFeatureField` |
 | Dialogs | `ActionDialog`, `BottomSheetSelectContent`, `ToastV1` |
 | Frames | `IconFrame`, `ListFrame`, `ProfileFrame`, `ScreenFrame` |
-| Scaffolds | `BaseScaffold`, `ScaffoldV1`, `LoadingOverlayV1` |
+| Scaffolds | `BaseScaffold`, `AppScaffold`, `LoadingOverlayV1` |
 | States | `LoadingIndicator`, `LoadingShimmer`, `InfoDisplay` |
 | Custom | `CustomIcon`, `DividerV1`, `Dot`, `ExpansionTileV1`, `HyperLinkText`, `InitialsDisplay`, `ListTileV1`, `PasswordStrengthChecker` |
 
@@ -154,4 +154,7 @@ BaseTextField(
 
 - Run tests: `flutter test`
 - Analyze: `flutter analyze`
-- Example app available in the `example/widget_preview/` directory
+- Browse the example app in the `example/` directory to see all components in action:
+  ```bash
+  cd example && flutter run
+  ```
