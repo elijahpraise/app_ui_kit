@@ -1,4 +1,3 @@
-/// A UI component kit for Flutter applications.
 export 'src/config/config.dart';
 export 'src/headless/headless.dart';
 export 'src/theme/theme.dart';
