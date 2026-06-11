@@ -1,6 +1,6 @@
 name: app_ui_kit
 description: "A comprehensive Flutter UI kit with theming, components, and design presets."
-version: 0.0.1+1
+version: 0.0.1+2
 homepage: https://github.com/elijahpraise/app_ui_kit
 
 environment:

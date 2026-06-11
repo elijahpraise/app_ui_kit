@@ -1,3 +1,10 @@
+## 0.0.1+2
+
+* Removed `flutter_hooks` dependency — `PasswordField` and `ExpansionTileV1` migrated from `HookWidget` to `StatefulWidget`/`StatelessWidget` with plain `setState`
+* `_SearchBottomSheetContent` in `SearchInputField` refactored from hooks to `StatefulWidget` with `onChanged` callback
+* Added `///` documentation to all 145 previously undocumented public APIs across the library (verified via `public_member_api_docs` lint)
+* `ExpansionTileV1` converted to `StatelessWidget` — no longer tracks expanded state
+
 ## 0.0.1+1
 
 * Removed `FlutterUIKit` widget — use `AppUiKit.initialize()` instead

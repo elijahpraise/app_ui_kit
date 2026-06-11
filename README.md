@@ -20,7 +20,7 @@ Quickly theme your app with brand-inspired presets: `Default`, `Vercel`, `Airbnb
 All adaptive widgets automatically render Material or Cupertino variants based on platform.
 
 ### 🧠 Headless State Management
-Lightweight `ChangeNotifier`-based state management with `HeadlessValueController`, `ToggleController`, and `HeadlessBuilder` widget.
+Lightweight `ChangeNotifier`-based state management with `HeadlessValueController`, `ToggleController`, and `HeadlessBuilder` widget. Zero external state management dependencies — no hooks, no providers, no blocs.
 
 ### 🛠 Helpers
 `DateTimeHelper`, `DialogHelper`, `InteractionHelper`, `SliverHelper`, `SnackBarHelper`, `ToastHelper`.
@@ -28,7 +28,7 @@ Lightweight `ChangeNotifier`-based state management with `HeadlessValueControlle
 ### 🔤 Google Fonts Integration
 When a `fontFamily` is provided (e.g., `'Inter'`, `'Roboto'`), the theme builder automatically resolves it via `GoogleFonts.getFont()`. Works with any Google Font — no manual font asset setup required. System fonts (`.SF Pro Display`, `Airbnb Cereal`) fall back gracefully.
 
-### 🧪 162 Passing Tests
+### 🧪 180 Passing Tests
 Full test coverage across all components, presets, themes, helpers, and controllers.
 
 ## Getting started
