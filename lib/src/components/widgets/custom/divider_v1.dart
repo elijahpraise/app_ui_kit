@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A customizable divider that supports horizontal and vertical
 /// orientations with rounded corners.
 class DividerV1 extends StatelessWidget {
+  /// Creates a [DividerV1].
   const DividerV1({
     super.key,
     this.color,

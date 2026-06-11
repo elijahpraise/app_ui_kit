@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A shimmer placeholder that animates a sweeping gradient across its
 /// surface to indicate loading content.
 class LoadingShimmer extends StatefulWidget {
+  /// Creates a [LoadingShimmer].
   const LoadingShimmer({
     super.key,
     this.width,

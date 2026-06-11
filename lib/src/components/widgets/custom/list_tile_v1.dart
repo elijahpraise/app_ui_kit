@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A themed list tile with press animation, optional divider, and
 /// customizable styling for leading, title, subtitle, and trailing widgets.
 class ListTileV1 extends StatefulWidget {
+  /// Creates a [ListTileV1].
   const ListTileV1({
     super.key,
     required this.title,

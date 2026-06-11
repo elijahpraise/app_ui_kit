@@ -7,6 +7,7 @@ import '../../foundation/platform.dart';
 /// A platform-aware scaffold that renders either a Material [Scaffold] or a
 /// [CupertinoPageScaffold] depending on the current platform.
 class BaseScaffold extends StatelessWidget {
+  /// Creates a platform-aware [BaseScaffold].
   const BaseScaffold({
     super.key,
     this.appBar,

@@ -6,6 +6,7 @@ import 'loading_overlay_v1.dart';
 /// A convenience scaffold that wraps [BaseScaffold] with a [LoadingOverlayV1]
 /// to show a loading state over the body content.
 class AppScaffold extends StatelessWidget {
+  /// Creates an [AppScaffold].
   const AppScaffold({
     super.key,
     this.appBar,

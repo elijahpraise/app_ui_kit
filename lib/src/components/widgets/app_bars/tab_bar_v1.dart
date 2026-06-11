@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A wrapper around the Material [TabBar] that applies sensible defaults from
 /// the current theme's [TabBarTheme].
 class TabBarV1 extends StatelessWidget implements PreferredSizeWidget {
+  /// Creates a themed [TabBarV1].
   const TabBarV1({
     super.key,
     /// The list of tab widgets to display.

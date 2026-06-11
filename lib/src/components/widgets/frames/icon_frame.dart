@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A frame that wraps an icon with a styled container, providing size,
 /// padding, color, background, and animated transitions.
 class IconFrame extends StatelessWidget {
+  /// Creates an [IconFrame].
   const IconFrame({
     super.key,
     required this.icon,

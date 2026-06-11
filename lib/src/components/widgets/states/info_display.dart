@@ -4,6 +4,7 @@ import 'package:lottie/lottie.dart';
 /// A centered information display with an icon, Lottie animation, title,
 /// and subtitle, commonly used for empty states or messages.
 class InfoDisplay extends StatelessWidget {
+  /// Creates an [InfoDisplay].
   const InfoDisplay({
     super.key,
     this.title,
@@ -23,28 +24,40 @@ class InfoDisplay extends StatelessWidget {
 
   /// The primary text displayed below the icon.
   final String? title;
+
   /// The secondary text displayed below the title.
   final String? subtitle;
+
   /// Code point string for a MaterialIcon to display.
-  final String? iconData;
+  final IconData? iconData;
+
   /// A custom widget to use as the icon area.
   final Widget? icon;
+
   /// Asset path to a Lottie animation to display.
   final String? lottie;
+
   /// An alternative widget shown in place of the subtitle text.
   final Widget? subtitleAlt;
+
   /// Size of the icon when using [iconData]. Defaults to 32.
   final double iconSize;
+
   /// Width and height of the Lottie animation. Defaults to 280.
   final double lottieSize;
+
   /// Color applied to the icon.
   final Color? iconColor;
+
   /// Spacing between elements. Defaults to 16.
   final double? spacing;
+
   /// Style override for the title text.
   final TextStyle? titleStyle;
+
   /// Style override for the subtitle text.
   final TextStyle? subtitleStyle;
+
   /// Padding around the entire content. Defaults to 24 on all sides.
   final EdgeInsetsGeometry? padding;
 
@@ -73,30 +86,27 @@ class InfoDisplay extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (lottie != null)
-                Lottie.asset(
-                  lottie!,
-                  width: lottieSize,
-                  height: lottieSize,
-                )
+                Lottie.asset(lottie!, width: lottieSize, height: lottieSize)
               else if (icon != null)
                 icon!
               else if (iconData != null)
                 Icon(
-                  IconData(
-                    int.parse(iconData!),
-                    fontFamily: 'MaterialIcons',
-                  ),
+                  iconData,
                   size: iconSize,
-                  color: iconColor ?? theme.colorScheme.onSurface.withValues(alpha: 0.4),
+                  color:
+                      iconColor ??
+                      theme.colorScheme.onSurface.withValues(alpha: 0.4),
                 ),
               if (title != null) ...[
                 SizedBox(height: effectiveSpacing),
                 Text(
                   title!,
                   textAlign: TextAlign.center,
-                  style: titleStyle ?? theme.textTheme.titleLarge?.copyWith(
-                    color: theme.colorScheme.onSurface,
-                  ),
+                  style:
+                      titleStyle ??
+                      theme.textTheme.titleLarge?.copyWith(
+                        color: theme.colorScheme.onSurface,
+                      ),
                 ),
               ],
               if (subtitleAlt != null) ...[
@@ -107,9 +117,13 @@ class InfoDisplay extends StatelessWidget {
                 Text(
                   subtitle!,
                   textAlign: TextAlign.center,
-                  style: subtitleStyle ?? theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                  ),
+                  style:
+                      subtitleStyle ??
+                      theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.6,
+                        ),
+                      ),
                 ),
               ],
             ],

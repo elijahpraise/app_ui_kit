@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A styled container frame for list items with configurable padding,
 /// margin, background, border, elevation, and animated transitions.
 class ListFrame extends StatelessWidget {
+  /// Creates a [ListFrame].
   const ListFrame({
     super.key,
     required this.child,

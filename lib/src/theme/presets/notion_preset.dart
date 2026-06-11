@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../color_values.dart';
 
+/// Preset color definitions for [DesignPreset.notion].
 class NotionPreset {
   NotionPreset._();
 
+  /// Light-mode [AppColors] for this preset.
   static AppColors get light => AppColors(
         primary: const Color(0xFF0075DE),
         secondary: const Color(0xFF9B9B9B),
@@ -36,6 +38,7 @@ class NotionPreset {
         dialogSurface: Colors.white,
       );
 
+  /// Dark-mode [AppColors] for this preset.
   static AppColors get dark => AppColors(
         primary: const Color(0xFF0075DE),
         secondary: const Color(0xFF9B9B9B),
@@ -67,9 +70,13 @@ class NotionPreset {
         dialogSurface: const Color(0xFF404040),
       );
 
+  /// The custom font family for this preset (Inter).
   static String get fontFamily => 'Inter';
 
+  /// Small border radius.
   static int get radiusSmall => 4;
+  /// Medium border radius.
   static int get radiusMedium => 8;
+  /// Large border radius.
   static int get radiusLarge => 12;
 }

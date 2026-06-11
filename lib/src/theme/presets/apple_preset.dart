@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../color_values.dart';
 
+/// Preset color definitions for [DesignPreset.apple].
 class ApplePreset {
   ApplePreset._();
 
+  /// Light-mode [AppColors] for this preset.
   static AppColors get light => AppColors(
         primary: const Color(0xFF007AFF),
         secondary: const Color(0xFF5856D6),
@@ -36,6 +38,7 @@ class ApplePreset {
         dialogSurface: const Color(0xFFF2F2F7),
       );
 
+  /// Dark-mode [AppColors] for this preset.
   static AppColors get dark => AppColors(
         primary: const Color(0xFF0A84FF),
         secondary: const Color(0xFF5E5CE6),
@@ -67,9 +70,15 @@ class ApplePreset {
         dialogSurface: const Color(0xFF2C2C2E),
       );
 
+  /// The custom font family for this preset (`.SF Pro Display`).
   static String get fontFamily => '.SF Pro Display';
 
+  /// Small border radius (6).
   static int get radiusSmall => 6;
+
+  /// Medium border radius (10).
   static int get radiusMedium => 10;
+
+  /// Large border radius (18).
   static int get radiusLarge => 18;
 }

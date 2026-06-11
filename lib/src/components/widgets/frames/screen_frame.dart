@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 /// A scrollable screen frame that wraps a child with padding, supporting
 /// fixed-height and unbounded scroll modes.
 class ScreenFrame extends StatelessWidget {
+  /// Creates a scrollable [ScreenFrame] in unbounded mode.
   const ScreenFrame({
     super.key,
     this.child,
@@ -98,11 +99,20 @@ class ScreenFrame extends StatelessWidget {
 
 /// Determines whether [ScreenFrame] constrains its child to the available
 /// screen height ([fixed]) or allows unbounded scrolling ([unbounded]).
-enum ScreenFrameMode { fixed, unbounded }
+enum ScreenFrameMode {
+  /// Constrains the child to the available screen height.
+  fixed,
+
+  /// Allows the child to take its natural height with scrolling.
+  unbounded,
+}
 
 /// Extension on [BuildContext] that provides the available frame size
 /// accounting for system insets, app bar, and keyboard.
+/// Provides the available frame size accounting for system insets.
 extension ScreenFrameContext on BuildContext {
+  /// Returns the available screen size minus top padding, app bar height,
+  /// and keyboard inset.
   Size frameSize() {
     final mediaQuery = MediaQuery.of(this);
     final bottomInset = mediaQuery.viewInsets.bottom;

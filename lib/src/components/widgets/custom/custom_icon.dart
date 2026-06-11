@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 /// Renders an SVG or raster image asset as an icon with optional color
 /// tinting and sizing.
 class CustomIcon extends StatelessWidget {
+  /// Creates a [CustomIcon].
   const CustomIcon({
     super.key,
     required this.path,

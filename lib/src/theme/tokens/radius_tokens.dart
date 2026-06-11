@@ -1,6 +1,7 @@
 /// A container for predefined border-radius values (small, medium, large)
 /// used consistently across themed widgets.
 class RadiusTokens {
+  /// Creates a [RadiusTokens] with the given border-radius values.
   const RadiusTokens({
     required this.small,
     required this.medium,

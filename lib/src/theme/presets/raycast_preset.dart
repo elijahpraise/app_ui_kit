@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../color_values.dart';
 
+/// Preset color definitions for [DesignPreset.raycast].
 class RaycastPreset {
   RaycastPreset._();
 
+  /// Light-mode [AppColors] for this preset.
   static AppColors get light => AppColors(
         primary: const Color(0xFF0D0D0D),
         secondary: const Color(0xFF6B7280),
@@ -36,6 +38,7 @@ class RaycastPreset {
         dialogSurface: Colors.white,
       );
 
+  /// Dark-mode [AppColors] for this preset.
   static AppColors get dark => AppColors(
         primary: const Color(0xFFF4F4F6),
         secondary: const Color(0xFF9CA3AF),
@@ -67,9 +70,13 @@ class RaycastPreset {
         dialogSurface: const Color(0xFF1F2128),
       );
 
+  /// The custom font family for this preset (Inter).
   static String get fontFamily => 'Inter';
 
+  /// Small border radius.
   static int get radiusSmall => 4;
+  /// Medium border radius.
   static int get radiusMedium => 8;
+  /// Large border radius.
   static int get radiusLarge => 12;
 }

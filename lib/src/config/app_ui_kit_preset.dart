@@ -42,6 +42,7 @@ enum AppUiKitPreset {
   raycast,
 }
 
+/// Provides conversion from [AppUiKitPreset] to the core [DesignPreset].
 extension AppUiKitPresetX on AppUiKitPreset {
   /// Converts this config-level preset to the equivalent [DesignPreset]
   /// used by [AppTheme.build] and the component library.

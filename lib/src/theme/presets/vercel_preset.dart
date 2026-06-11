@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../color_values.dart';
 
+/// Preset color definitions for [DesignPreset.vercel].
 class VercelPreset {
   VercelPreset._();
 
+  /// Light-mode [AppColors] for this preset.
   static AppColors get light => AppColors(
         primary: const Color(0xFF000000),
         secondary: const Color(0xFF64748B),
@@ -36,6 +38,7 @@ class VercelPreset {
         dialogSurface: Colors.white,
       );
 
+  /// Dark-mode [AppColors] for this preset.
   static AppColors get dark => AppColors(
         primary: Colors.white,
         secondary: const Color(0xFFA1A1AA),
@@ -67,9 +70,13 @@ class VercelPreset {
         dialogSurface: const Color(0xFF18181B),
       );
 
+  /// The custom font family for this preset (Inter).
   static String get fontFamily => 'Inter';
 
+  /// Small border radius.
   static int get radiusSmall => 4;
+  /// Medium border radius.
   static int get radiusMedium => 8;
+  /// Large border radius.
   static int get radiusLarge => 16;
 }

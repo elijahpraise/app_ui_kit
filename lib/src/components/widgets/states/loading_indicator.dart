@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A centered circular progress indicator with customizable color, size,
 /// and stroke width.
 class LoadingIndicator extends StatelessWidget {
+  /// Creates a [LoadingIndicator].
   const LoadingIndicator({
     super.key,
     this.color,

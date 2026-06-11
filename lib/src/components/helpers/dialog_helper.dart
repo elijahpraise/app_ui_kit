@@ -47,8 +47,9 @@ class DialogHelper {
   }
 }
 
-/// Private wrapper to avoid naming conflict with Flutter's showDialog.
+/// Wraps [showDialog] to avoid naming conflict with Flutter's `showDialog`.
 class FlutterDialogHelper {
+  /// Displays a Material dialog using the given [builder].
   static Future<T?> showDialog<T>({
     required BuildContext context,
     required WidgetBuilder builder,
@@ -62,8 +63,10 @@ class FlutterDialogHelper {
   }
 }
 
-/// Private wrapper to avoid naming conflict with Flutter's showModalBottomSheet.
+/// Wraps [showModalBottomSheet] to avoid naming conflict with Flutter's
+/// `showModalBottomSheet`.
 class FlutterModalBottomSheet {
+  /// Displays a modal bottom sheet using the given [builder].
   static Future<T?> showModalBottomSheet<T>({
     required BuildContext context,
     required WidgetBuilder builder,

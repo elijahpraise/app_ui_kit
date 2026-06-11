@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A circular or rounded avatar that displays initials derived from a
 /// name, with support for acronyms and animated transitions.
 class InitialsDisplay extends StatelessWidget {
+  /// Creates an [InitialsDisplay].
   const InitialsDisplay({
     super.key,
     required this.name,

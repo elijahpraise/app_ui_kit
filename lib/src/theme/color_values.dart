@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A container for all color values used throughout the app theme, organized
 /// by semantic purpose (primary, surface, toast, input, etc.).
 class AppColors {
+  /// Creates an [AppColors] with all required color fields.
   const AppColors({
     required this.primary,
     required this.secondary,
@@ -118,6 +119,7 @@ class AppColors {
   /// The background color of dialogs and bottom sheets.
   final Color dialogSurface;
 
+  /// Linearly interpolates between this [AppColors] and [other] by [t].
   AppColors lerp(AppColors other, double t) {
     return AppColors(
       primary: Color.lerp(primary, other.primary, t)!,

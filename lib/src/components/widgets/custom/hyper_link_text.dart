@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A tappable text widget styled as a hyperlink with an optional
 /// underline decoration.
 class HyperLinkText extends StatelessWidget {
+  /// Creates a [HyperLinkText].
   const HyperLinkText({
     super.key,
     required this.text,

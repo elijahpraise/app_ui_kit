@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
 
 /// Represents the strength level of a password, from [weak] to [strong].
-enum PasswordStrength { weak, fair, good, strong }
+enum PasswordStrength {
+  /// Weak password.
+  weak,
 
+  /// Fair password.
+  fair,
+
+  /// Good password.
+  good,
+
+  /// Strong password.
+  strong,
+}
+
+/// Provides label, color, and progress resolution for [PasswordStrength].
 extension PasswordStrengthLabel on PasswordStrength {
+  /// A human-readable label for this strength level.
   String get label {
     return switch (this) {
       PasswordStrength.weak => 'Weak',
@@ -13,6 +27,7 @@ extension PasswordStrengthLabel on PasswordStrength {
     };
   }
 
+  /// Returns the color associated with this strength level.
   Color resolveColor(ThemeData theme) {
     return switch (this) {
       PasswordStrength.weak => theme.colorScheme.error,
@@ -22,6 +37,7 @@ extension PasswordStrengthLabel on PasswordStrength {
     };
   }
 
+  /// A 0.0–1.0 progress value for this strength level.
   double get progress {
     return switch (this) {
       PasswordStrength.weak => 0.25,
@@ -34,6 +50,7 @@ extension PasswordStrengthLabel on PasswordStrength {
 
 /// A single password requirement with a label and a validation function.
 class PasswordRequirement {
+  /// Creates a [PasswordRequirement] with a [label] and [isMet] checker.
   const PasswordRequirement({
     required this.label,
     required this.isMet,
@@ -52,6 +69,7 @@ class PasswordRequirement {
 /// Supports custom [requirements] and an optional display of which
 /// requirements are met via [showRequirements].
 class PasswordStrengthChecker extends StatelessWidget {
+  /// Creates a [PasswordStrengthChecker].
   const PasswordStrengthChecker({
     super.key,
     required this.password,

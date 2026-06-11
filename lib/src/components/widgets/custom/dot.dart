@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A small circular dot indicator that animates between active and
 /// inactive states with color changes.
 class Dot extends StatelessWidget {
+  /// Creates a [Dot].
   const Dot({
     super.key,
     this.size = 8,

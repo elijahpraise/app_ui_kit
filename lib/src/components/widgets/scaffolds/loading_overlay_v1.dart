@@ -5,6 +5,7 @@ import '../states/loading_indicator.dart';
 /// An animated overlay that covers [child] with a semi-transparent layer and
 /// loading indicator when [isLoading] is true.
 class LoadingOverlayV1 extends StatelessWidget {
+  /// Creates a [LoadingOverlayV1].
   const LoadingOverlayV1({
     super.key,
     required this.isLoading,

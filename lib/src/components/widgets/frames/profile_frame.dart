@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A circular or rounded frame for displaying profile images or placeholder
 /// widgets, with support for network images and animated transitions.
 class ProfileFrame extends StatelessWidget {
+  /// Creates a [ProfileFrame].
   const ProfileFrame({
     super.key,
     this.child,

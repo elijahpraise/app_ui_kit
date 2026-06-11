@@ -8,6 +8,7 @@ import 'text_style_tokens.dart';
 /// Aggregates the resolved [ColorTokens], [TextStyleTokens], and
 /// [RadiusTokens] for the current [BuildContext]'s theme.
 class ThemeToken {
+  /// Creates a [ThemeToken] with resolved color, text style, and radius tokens.
   const ThemeToken({
     required this.color,
     required this.textStyle,

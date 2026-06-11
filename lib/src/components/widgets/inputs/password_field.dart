@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'base_text_field.dart';
 import 'validators.dart';
 
 /// A password input field with a built-in visibility toggle button.
-class PasswordField extends HookWidget {
+class PasswordField extends StatefulWidget {
   /// Creates a [PasswordField].
   const PasswordField({
     super.key,
@@ -96,38 +95,51 @@ class PasswordField extends HookWidget {
   final ValueNotifier<bool>? obscureText;
 
   @override
+  State<PasswordField> createState() => _PasswordFieldState();
+}
+
+class _PasswordFieldState extends State<PasswordField> {
+  bool _obscure = true;
+
+  @override
   Widget build(BuildContext context) {
-    final obscure = obscureText ?? useState(true);
+    final obscure = widget.obscureText?.value ?? _obscure;
 
     return BaseTextField(
-      controller: controller,
-      focusNode: focusNode,
-      validator: validator,
-      onChanged: onChanged,
-      onFieldSubmitted: onFieldSubmitted,
-      enabled: enabled,
-      obscureText: obscure.value,
-      hintText: hintText,
-      labelText: labelText,
-      textStyle: textStyle,
-      hintStyle: hintStyle,
-      labelStyle: labelStyle,
-      errorStyle: errorStyle,
-      contentPadding: contentPadding,
-      borderRadius: borderRadius,
-      fillColor: fillColor,
-      borderColor: borderColor,
-      focusedBorderColor: focusedBorderColor,
-      errorBorderColor: errorBorderColor,
-      autovalidateMode: autovalidateMode,
-      prefixIcon: prefixIcon,
+      controller: widget.controller,
+      focusNode: widget.focusNode,
+      validator: widget.validator,
+      onChanged: widget.onChanged,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      enabled: widget.enabled,
+      obscureText: obscure,
+      hintText: widget.hintText,
+      labelText: widget.labelText,
+      textStyle: widget.textStyle,
+      hintStyle: widget.hintStyle,
+      labelStyle: widget.labelStyle,
+      errorStyle: widget.errorStyle,
+      contentPadding: widget.contentPadding,
+      borderRadius: widget.borderRadius,
+      fillColor: widget.fillColor,
+      borderColor: widget.borderColor,
+      focusedBorderColor: widget.focusedBorderColor,
+      errorBorderColor: widget.errorBorderColor,
+      autovalidateMode: widget.autovalidateMode,
+      prefixIcon: widget.prefixIcon,
       suffixIcon: IconButton(
         icon: Icon(
-          obscure.value
+          obscure
               ? Icons.visibility_off_outlined
               : Icons.visibility_outlined,
         ),
-        onPressed: () => obscure.value = !obscure.value,
+        onPressed: () {
+          if (widget.obscureText != null) {
+            widget.obscureText!.value = !widget.obscureText!.value;
+          } else {
+            setState(() { _obscure = !_obscure; });
+          }
+        },
       ),
     );
   }

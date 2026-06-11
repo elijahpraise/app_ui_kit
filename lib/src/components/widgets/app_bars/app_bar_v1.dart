@@ -6,6 +6,7 @@ import '../../foundation/platform.dart';
 /// A platform-adaptive app bar that renders either a Material [AppBar] or a
 /// Cupertino [CupertinoNavigationBar] based on the current platform.
 class AppBarV1 extends StatelessWidget implements PreferredSizeWidget {
+  /// Creates a platform-adaptive [AppBarV1].
   const AppBarV1({
     super.key,
     /// The primary title widget displayed in the center of the app bar.

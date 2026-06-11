@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 /// A container for all predefined [TextStyle]s used throughout the app,
 /// organized by semantic role (heading, body, caption, button, etc.).
 class TextStyleTokens {
+  /// Creates a [TextStyleTokens] with all required text styles.
   const TextStyleTokens({
     required this.heading1,
     required this.heading2,

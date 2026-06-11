@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../color_values.dart';
 
+/// Preset color definitions for [DesignPreset.spotify].
 class SpotifyPreset {
   SpotifyPreset._();
 
+  /// Light-mode [AppColors] for this preset.
   static AppColors get light => AppColors(
         primary: const Color(0xFF1DB954),
         secondary: const Color(0xFF535353),
@@ -36,6 +38,7 @@ class SpotifyPreset {
         dialogSurface: Colors.white,
       );
 
+  /// Dark-mode [AppColors] for this preset.
   static AppColors get dark => AppColors(
         primary: const Color(0xFF1DB954),
         secondary: const Color(0xFFA7A7A7),
@@ -67,9 +70,13 @@ class SpotifyPreset {
         dialogSurface: const Color(0xFF282828),
       );
 
+  /// The custom font family for this preset (Inter).
   static String get fontFamily => 'Inter';
 
+  /// Small border radius.
   static int get radiusSmall => 4;
+  /// Medium border radius.
   static int get radiusMedium => 8;
+  /// Large border radius.
   static int get radiusLarge => 16;
 }

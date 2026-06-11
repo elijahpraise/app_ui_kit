@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 
 /// Defines the visual style variants for toast notifications.
-enum ToastType { info, error, success }
+enum ToastType {
+  /// An informational toast.
+  info,
 
+  /// An error toast.
+  error,
+
+  /// A success toast.
+  success,
+}
+
+/// Provides color, icon, and on-color resolution for [ToastType] values.
 extension ToastTypeColor on ToastType {
+  /// Returns the background color for this toast type.
   Color resolveColor(ThemeData theme) {
     return switch (this) {
       ToastType.info => theme.colorScheme.primary,
@@ -12,6 +23,7 @@ extension ToastTypeColor on ToastType {
     };
   }
 
+  /// Returns the foreground (text/icon) color for this toast type.
   Color resolveOnColor(ThemeData theme) {
     return switch (this) {
       ToastType.info => theme.colorScheme.onPrimary,
@@ -20,6 +32,7 @@ extension ToastTypeColor on ToastType {
     };
   }
 
+  /// The icon associated with this toast type.
   IconData get icon {
     return switch (this) {
       ToastType.info => Icons.info_outline,

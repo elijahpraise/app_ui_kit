@@ -1,4 +1,4 @@
-## 0.0.2
+## 0.0.1+1
 
 * Removed `FlutterUIKit` widget — use `AppUiKit.initialize()` instead
 * `PasswordStrengthChecker` accepts custom `requirements` and optional `showRequirements` checklist

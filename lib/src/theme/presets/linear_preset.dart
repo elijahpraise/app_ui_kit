@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../color_values.dart';
 
+/// Preset color definitions for [DesignPreset.linear].
 class LinearPreset {
   LinearPreset._();
 
+  /// Light-mode [AppColors] for this preset.
   static AppColors get light => AppColors(
         primary: const Color(0xFF5E6AD2),
         secondary: const Color(0xFF8B8FA3),
@@ -36,6 +38,7 @@ class LinearPreset {
         dialogSurface: Colors.white,
       );
 
+  /// Dark-mode [AppColors] for this preset.
   static AppColors get dark => AppColors(
         primary: const Color(0xFF5E6AD2),
         secondary: const Color(0xFF8B8FA3),
@@ -67,9 +70,13 @@ class LinearPreset {
         dialogSurface: const Color(0xFF181A1E),
       );
 
+  /// The custom font family for this preset (Inter).
   static String get fontFamily => 'Inter';
 
+  /// Small border radius.
   static int get radiusSmall => 4;
+  /// Medium border radius.
   static int get radiusMedium => 8;
+  /// Large border radius.
   static int get radiusLarge => 12;
 }

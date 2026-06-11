@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../color_values.dart';
 
+/// Preset color definitions for [DesignPreset.defaultPreset].
 class DefaultPreset {
   DefaultPreset._();
 
+  /// Light-mode [AppColors] for this preset.
   static AppColors get light => AppColors(
         primary: const Color(0xFF4F46E5),
         secondary: const Color(0xFF7C3AED),
@@ -36,6 +38,7 @@ class DefaultPreset {
         dialogSurface: Colors.white,
       );
 
+  /// Dark-mode [AppColors] for this preset.
   static AppColors get dark => AppColors(
         primary: const Color(0xFF818CF8),
         secondary: const Color(0xFFA78BFA),
@@ -67,9 +70,15 @@ class DefaultPreset {
         dialogSurface: const Color(0xFF1E293B),
       );
 
+  /// Optional custom font family for this preset. Null means use system default.
   static String? get fontFamily => null;
 
+  /// Small border radius (6).
   static int get radiusSmall => 6;
+
+  /// Medium border radius (12).
   static int get radiusMedium => 12;
+
+  /// Large border radius (20).
   static int get radiusLarge => 20;
 }

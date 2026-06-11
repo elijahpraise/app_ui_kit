@@ -3,6 +3,7 @@ import '../color_values.dart';
 /// A token wrapper around [AppColors] providing convenient access to the
 /// color values.
 class ColorTokens {
+  /// Creates a [ColorTokens] wrapping the given [AppColors].
   const ColorTokens(this.values);
 
   /// The underlying [AppColors] instance.

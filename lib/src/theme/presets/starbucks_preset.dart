@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../color_values.dart';
 
+/// Preset color definitions for [DesignPreset.starbucks].
 class StarbucksPreset {
   StarbucksPreset._();
 
+  /// Light-mode [AppColors] for this preset.
   static AppColors get light => AppColors(
         primary: const Color(0xFF006241),
         secondary: const Color(0xFF8B8B7F),
@@ -36,6 +38,7 @@ class StarbucksPreset {
         dialogSurface: Colors.white,
       );
 
+  /// Dark-mode [AppColors] for this preset.
   static AppColors get dark => AppColors(
         primary: const Color(0xFF1E3932),
         secondary: const Color(0xFFB0AFA3),
@@ -67,9 +70,13 @@ class StarbucksPreset {
         dialogSurface: const Color(0xFF2D4A42),
       );
 
+  /// The custom font family for this preset (Inter).
   static String get fontFamily => 'Inter';
 
+  /// Small border radius.
   static int get radiusSmall => 6;
+  /// Medium border radius.
   static int get radiusMedium => 12;
+  /// Large border radius.
   static int get radiusLarge => 20;
 }
